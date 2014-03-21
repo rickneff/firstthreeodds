@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Rick Neff (by hand)
+X-COMMENT: Main-Class not needed
+Y-COMMENT: Includes dependencies on slf4j-api-1.7.6.jar and slf4j-simple-1.7.6.jar
