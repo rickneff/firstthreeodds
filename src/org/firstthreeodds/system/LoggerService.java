@@ -20,11 +20,13 @@ import org.slf4j.*;
  *
  * LoggerService's methods must be statically imported for this to work:
  *
- * import static thirstifish.system.LoggerService.*;
+ * import static org.firstthreeodds.system.LoggerService.*;
  *
  * Convenience methods allow a Class instead of an Object to be passed
  * as the first parameter, to allow logging from static contexts (where
  * no "this" is available).
+ *
+ * @author Rick Neff
  */
 public class LoggerService
 {
