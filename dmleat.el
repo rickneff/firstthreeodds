@@ -13,7 +13,7 @@
   $HOME/.emacs.d/private/id_rsa. Get set for further server interaction."
   (setq username (downcase username))
   (let* ((home-dir (getenv "HOME"))
-         (private-dir (format "%s/.emacs.d/private" home-dir))
+         (private-dir "~/.emacs.d/private")
          (fto-server "firstthreeodds.org")
          (creds-file (format "%s/creds.org" private-dir))
          (id-file (format "%s/id_rsa.%s" private-dir username))
