@@ -19,9 +19,10 @@
          (id-file (format "%s/id_rsa.%s" private-dir username))
          (ssh-config-dir (format "%s/.ssh" home-dir))
          (ssh-config-file (format "%s/config" ssh-config-dir))
-         (ssh-host-configuration (format "Host %s\n  Hostname=%s\n  IdentityFile=%s\n\n"
-                                         username fto-server id-file))
-         (make-backup-files nil))
+         (ssh-host-configuration
+          (format "Host %s\n\tHostname=%s\n\tIdentityFile=%s\nStrictHostKeyChecking=no\n\n"
+                  username fto-server id-file))
+          (make-backup-files nil))
     (with-temp-buffer
       (insert (format "%s %s\n" username password))
       (write-file creds-file))
@@ -37,6 +38,7 @@
             (delete-char 1)
             (write-file id-file))
           (delete-file creds-file)
+          (set-file-modes id-file #o600)
           (mkdir ssh-config-dir t)
           (with-temp-buffer
             (when (file-readable-p ssh-config-file)
