@@ -10,14 +10,13 @@
 
 (defun get-started (username password)
   "Download a private key from the fto server and install it in
-  $HOME/.emacs.d/private/id_rsa. Get set for further server interaction."
+  ~/.emacs.d/private/id_rsa. Get set for further server interaction."
   (setq username (downcase username))
-  (let* ((home-dir (getenv "HOME"))
-         (private-dir "~/.emacs.d/private")
+  (let* ((private-dir "~/.emacs.d/private")
          (fto-server "firstthreeodds.org")
          (creds-file (format "%s/creds.org" private-dir))
          (id-file (format "%s/id_rsa.%s" private-dir username))
-         (ssh-config-dir (format "%s/.ssh" home-dir))
+         (ssh-config-dir "~/.ssh")
          (ssh-config-file (format "%s/config" ssh-config-dir))
          (ssh-host-configuration
           (format "Host %s\n\tHostname=%s\n\tIdentityFile=%s\nStrictHostKeyChecking=no\n\n"
@@ -54,13 +53,13 @@
 (defun get-ready-and-get-set ()
   (switch-to-buffer "*scratch*")
   (insert (concat "\nYour username is your TLA (case insensitive).\n"
-                  "\nYour password is your I-number (digits only, no hyphens).\n\n"))
+                  "\nYour password is your I-number (9 digits only, no hyphens).\n\n"))
   (let* ((username (read-no-blanks-input "Enter your username: "))
          (password (read-passwd "Enter your password: " t)))
     (get-started username password)))
 
 (defun get-tla-if-there ()
-  (let* ((private-dir (concat (getenv "HOME") "/.emacs.d/private"))
+  (let* ((private-dir "~/.emacs.d/private")
          (id-files-in-private-dir (directory-files private-dir nil "id_rsa.[a-z][a-z][a-z]")))
     (mapcar (lambda (x) (substring x 7)) id-files-in-private-dir)))
 
@@ -76,7 +75,7 @@
     (switch-to-buffer filename))
   (setq tla (get-tla-if-there))
   (if (listp tla) (setq tla (car tla)))
-  (unless (file-readable-p (format "%s/%s/.git/config" (getenv "HOME") tla))
+  (unless (file-readable-p (format "~/%s/.git/config" tla))
     (clone-repository tla)))
 
 (defvar git-update-shell-command-template
