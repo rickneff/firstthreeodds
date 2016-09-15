@@ -19,7 +19,7 @@
          (ssh-config-dir "~/.ssh")
          (ssh-config-file (format "%s/config" ssh-config-dir))
          (ssh-host-configuration
-          (format "Host %s\n\tHostname=%s\n\tIdentityFile=%s\nStrictHostKeyChecking=no\n\n"
+          (format "Host %s\n\tHostname=%s\n\tIdentityFile=%s\n\tStrictHostKeyChecking=no\n\n"
                   username fto-server id-file))
           (make-backup-files nil))
     (with-temp-buffer
