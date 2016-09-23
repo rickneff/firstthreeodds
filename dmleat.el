@@ -1,3 +1,4 @@
+
 ;;; dmleat.el --- functions for DMLEAT
 
 ;; Copyright (C) 2016 Rick Neff
@@ -19,7 +20,7 @@
          (ssh-config-dir "~/.ssh")
          (ssh-config-file (format "%s/config" ssh-config-dir))
          (ssh-host-configuration
-          (format "Host %s\n\tHostname=%s\n\tIdentityFile=%s\n\tStrictHostKeyChecking=no\n\n"
+          (format "Host %s\n      Hostname=%s\n      IdentityFile=%s\n      StrictHostKeyChecking=no\n\n"
                   username fto-server id-file))
           (make-backup-files nil))
     (with-temp-buffer
@@ -28,13 +29,10 @@
     (if (executable-find "curl")
         (let ((result
                (shell-command-to-string
-                (format "curl -s -F \"fileUploaded=@%s\" https://%s/run/app?get-private-key"
-                        creds-file fto-server))))
+                (format "cd %s; curl -k -s -F fileUploaded=@creds.org https://%s/run/app?get-private-key"
+                        private-dir fto-server))))
           (with-temp-buffer
             (insert result)
-            (backward-delete-char 1)
-            (goto-char (point-min))
-            (delete-char 1)
             (write-file id-file))
           (delete-file creds-file)
           (set-file-modes id-file #o600)
