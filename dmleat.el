@@ -73,8 +73,12 @@
     (switch-to-buffer filename))
   (setq tla (get-tla-if-there))
   (if (listp tla) (setq tla (car tla)))
-  (unless (file-readable-p (format "~/%s/.git/config" tla))
-    (clone-repository tla)))
+  (let ((repo-git-config-file (format "~/%s/.git/config" tla)))
+    (unless (file-readable-p repo-git-config-file)
+      (clone-repository tla)
+      (unless (file-readable-p repo-git-config-file)
+        (delete-file (format "~/.emacs.d/private/id_rsa.%s" tla))
+        ))))
 
 (defvar git-update-shell-command-template
   "git pull && git add %s && git commit -m Committed. && git push")
