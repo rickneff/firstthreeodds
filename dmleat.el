@@ -76,7 +76,13 @@
   (let ((repo-git-config-file (format "~/%s/.git/config" tla)))
     (unless (file-readable-p repo-git-config-file)
       (clone-repository tla)
-      (unless (file-readable-p repo-git-config-file)
+      (if (file-readable-p repo-git-config-file)
+          (progn (shell-command-to-string
+                  (concat "git config --global --get user.name || "
+                          "git config --global user.name " tla))
+                 (shell-command-to-string
+                  (concat "git config --global --get user.email || "
+                          "git config --global user.email cam@functionalthinking.org")))
         (delete-file (format "~/.emacs.d/private/id_rsa.%s" tla))
         ))))
 
@@ -86,15 +92,14 @@
 (defun send-receive-changes (filename)
   (ensure-readiness filename)
   (if (executable-find "git")
-      (shell-command-to-string
-       (format git-update-shell-command-template (file-name-nondirectory filename)))
+      (when filename
+        (shell-command-to-string
+         (format git-update-shell-command-template (file-name-nondirectory filename))))
     (error "No git executable found")))
 
 (defun src ()
   (interactive)
-  (let ((bfn (buffer-file-name)))
-    (when bfn
-      (send-receive-changes bfn))))
+  (send-receive-changes (buffer-file-name)))
 
 (defun convert-to-letter-grade (weighted-percentage)
   (let* ((number (ceiling weighted-percentage))
