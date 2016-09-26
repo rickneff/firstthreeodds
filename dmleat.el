@@ -67,7 +67,8 @@
     (error "No git executable found")))
 
 (defun ensure-readiness (filename)
-  (save-buffer)
+  (when filename
+    (save-buffer))
   (when (null (setq tla (get-tla-if-there)))
     (get-ready-and-get-set)
     (switch-to-buffer filename))
