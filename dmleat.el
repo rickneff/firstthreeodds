@@ -1,4 +1,3 @@
-
 ;;; dmleat.el --- functions for DMLEAT
 
 ;; Copyright (C) 2016 Rick Neff
@@ -115,7 +114,7 @@
 )
 
 (defun compute-final-grade (grades)
-  (let ((weighted-percentage (apply '+ (mapcar 'fourth (cddr grades)))))
+  (let ((weighted-percentage (apply '+ (mapcar 'fourth grades))))
     (list weighted-percentage (convert-to-letter-grade weighted-percentage))))
 
 (provide 'dmleat)
