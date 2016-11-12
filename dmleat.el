@@ -87,7 +87,7 @@
         ))))
 
 (defvar git-update-shell-command-template
-  "git pull && git add %s && git commit -m Committed. && git push")
+  "bash -c 'git pull && git add %s && git commit -m Committed. && git push'")
 
 (defun send-receive-changes (filename)
   (ensure-readiness filename)
