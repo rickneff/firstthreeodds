@@ -117,4 +117,29 @@
   (let ((weighted-percentage (apply '+ (mapcar 'fourth grades))))
     (list weighted-percentage (convert-to-letter-grade weighted-percentage))))
 
+(require 'eww)
+
+(defvar *package-server-url* "https://firstthreeodds.org/packages")
+
+(defvar *package-directory* (expand-file-name "~/.emacs.d/private/local"))
+
+(mkdir *package-directory* t)
+
+;; extend the load-path
+(pushnew *package-directory* load-path)
+
+(defun retrieve-package (package-name)
+  "Retrieves a given named package (string or symbol) from the fto server."
+  (let* ((package-file (format "%s/%s.el" *package-directory* package-name))
+         (temp-buffer (url-retrieve-synchronously
+                       (format "%s/%s.el" *package-server-url* package-name) t t)))
+    (with-current-buffer temp-buffer
+      (unwind-protect
+          (let* ((headers (eww-parse-headers))
+                 (content-length (string-to-number (cdr (assoc "content-length" headers))))
+                 (end (point-max)))
+            (write-region (- end content-length) end package-file)
+            (kill-buffer temp-buffer)))
+      package-file)))
+
 (provide 'dmleat)
