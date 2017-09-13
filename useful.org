@@ -5,3 +5,13 @@
     (previous-line 1)
     (insert "  "))
 #+END_SRC
+
+#+BEGIN_SRC sh :tangle pull-upstream.sh 
+  # 1. cd to your Work at Learning repo clone.
+  # THE NEXT STEP NEED ONLY BE DONE ONCE.
+  # 2. add a remote upstream repo
+  git remote add upstream https://github.com/rmn97153/033917.git
+  # 3. pull from it:
+  git pull upstream master
+#+END_SRC
+
