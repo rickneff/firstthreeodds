@@ -1,4 +1,3 @@
-
 #+BEGIN_SRC emacs-lisp :results silent :tangle yes
   (defun el ()
     (insert "#+BEGIN_SRC emacs-lisp :results silent\n\n#+END_SRC")
@@ -6,12 +5,65 @@
     (insert "  "))
 #+END_SRC
 
-#+BEGIN_SRC sh :tangle pull-upstream.sh 
-  # 1. cd to your Work at Learning repo clone.
-  # THE NEXT STEP NEED ONLY BE DONE ONCE.
-  # 2. add a remote upstream repo
-  git remote add upstream https://github.com/rmn97153/033917.git
-  # 3. pull from it:
-  git pull upstream master
+#+BEGIN_SRC emacs-lisp :results silent :tangle yes
+  (require 'eww)
+
+  (defun call-fto-servlet (servlet-name)
+    (let* ((temp-buffer
+            (url-retrieve-synchronously
+             (format "http://firstthreeodds.org/%s" servlet-name) t t))
+           (reply ""))
+      (with-current-buffer temp-buffer
+        (setq reply (buffer-string))
+        (unwind-protect
+            (let* ((headers (eww-parse-headers))
+                   (content-length (string-to-int (cdr (assoc "content-length" headers))))
+                   (content (buffer-substring (point) (point-max))))
+              (setq reply content))))
+      (kill-buffer temp-buffer)
+      reply))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp :results silent :tangle yes
+  (require 'org)
+
+  (defun get-hint (&optional tla-as-symbol)
+    (let ((tla (downcase
+                (if tla-as-symbol
+                    (symbol-name tla-as-symbol)
+                  (org-entry-get (point) "ITEM")))))
+      (call-fto-servlet (format "mebewiyo/book/hint/%s" tla))))
+#+END_SRC
+
+* Test Old Hint
+  Supplying the optional parameter:
+#+BEGIN_SRC emacs-lisp
+  (get-hint 'CRC)
+#+END_SRC
+
+* Test New Hints
+  Getting the TLA identifier from the enclosing org-entry ITEM:
+** OQP
+#+BEGIN_SRC emacs-lisp
+  (get-hint)
+#+END_SRC
+** USV
+#+BEGIN_SRC emacs-lisp
+  (get-hint)
+#+END_SRC
+** UGX
+#+BEGIN_SRC emacs-lisp
+  (get-hint)
+#+END_SRC
+** UOX
+#+BEGIN_SRC emacs-lisp
+  (get-hint)
+#+END_SRC
+** OIO
+#+BEGIN_SRC emacs-lisp
+  (get-hint)
+#+END_SRC
+** UIJ
+#+BEGIN_SRC emacs-lisp
+  (get-hint)
+#+END_SRC
