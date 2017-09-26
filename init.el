@@ -301,7 +301,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (require 'helm-bookmark)
-  (load-file "~/.spacemacs.d/useful.el")
+  (require 'org)
+  (apply 'load-file (org-babel-tangle-file "~/.spacemacs.d/useful.org"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

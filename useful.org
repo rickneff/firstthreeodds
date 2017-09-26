@@ -9,19 +9,16 @@
   (require 'eww)
 
   (defun call-fto-servlet (servlet-name)
-    (let* ((temp-buffer
-            (url-retrieve-synchronously
-             (format "http://firstthreeodds.org/%s" servlet-name) t t))
-           (reply ""))
+    (let ((temp-buffer
+           (url-retrieve-synchronously
+            (format "http://firstthreeodds.org/%s" servlet-name) t t))
+          headers content)
       (with-current-buffer temp-buffer
-        (setq reply (buffer-string))
         (unwind-protect
-            (let* ((headers (eww-parse-headers))
-                   (content-length (string-to-int (cdr (assoc "content-length" headers))))
-                   (content (buffer-substring (point) (point-max))))
-              (setq reply content))))
+            (setq headers (eww-parse-headers)
+                  content (buffer-substring (point) (point-max)))))
       (kill-buffer temp-buffer)
-      reply))
+      content))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :results silent :tangle yes
