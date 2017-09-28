@@ -64,3 +64,154 @@
 #+BEGIN_SRC emacs-lisp
   (get-hint)
 #+END_SRC
+
+* Getting ABC EPP Answers
+
+  For the keys, taking inspiration from USV, the code below prefixes with a
+  string of 4 consecutive digits your I-Number with any leading digits
+  preserved. That makes it a 13-digit string, which can be rotated right any
+  number of times from 0 to 12, giving a different string each time.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun rot-n (str n)
+    (setq n (- (mod n (length str))))
+    (concat (substring str n) (substring str 0 n)))
+
+  (defun abc-epp-key (prefix i-number n)
+    (rot-n (format "%s%09d" prefix i-number) n))
+
+  (defun oqp-key (i-number)
+    (abc-epp-key "1234" i-number 0))
+
+  (defun usv-key (i-number)
+    (abc-epp-key "1234" i-number 1))
+
+  (defun uca-key (i-number)
+    (abc-epp-key "1234" i-number 2))
+
+  (defun ods-key (i-number)
+    (abc-epp-key "1234" i-number 3))
+
+  (defun ugx-key (i-number)
+    (abc-epp-key "1234" i-number 4))
+
+  (defun ogr-key (i-number)
+    (abc-epp-key "1234" i-number 5))
+
+  (defun uwm-key (i-number)
+    (abc-epp-key "1234" i-number 6))
+
+  (defun opz-key (i-number)
+    (abc-epp-key "1234" i-number 7))
+
+  (defun uox-key (i-number)
+    (abc-epp-key "1234" i-number 8))
+
+  (defun otx-key (i-number)
+    (abc-epp-key "1234" i-number 9))
+
+  (defun uot-key (i-number)
+    (abc-epp-key "1234" i-number 10))
+
+  (defun oim-key (i-number)
+    (abc-epp-key "1234" i-number 11))
+
+  (defun uin-key (i-number)
+    (abc-epp-key "1234" i-number 12))
+
+  (defun ojl-key (i-number)
+    (abc-epp-key "2345" i-number 0))
+
+  (defun ucg-key (i-number)
+    (abc-epp-key "2345" i-number 1))
+
+  (defun oio-key (i-number)
+    (abc-epp-key "2345" i-number 2))
+
+  (defun uij-key (i-number)
+    (abc-epp-key "2345" i-number 3))
+
+  (defun oqt-key (i-number)
+    (abc-epp-key "2345" i-number 4))
+
+  (defun utq-key (i-number)
+    (abc-epp-key "2345" i-number 5))
+
+  (defun oyu-key (i-number)
+    (abc-epp-key "2345" i-number 6))
+
+  (defun uoh-key (i-number)
+    (abc-epp-key "2345" i-number 7))
+
+  (defun ozd-key (i-number)
+    (abc-epp-key "2345" i-number 8))
+
+  (defun uzm-key (i-number)
+    (abc-epp-key "2345" i-number 9))
+
+  (defun ooy-key (i-number)
+    (abc-epp-key "2345" i-number 10))
+
+  (defun ufz-key (i-number)
+    (abc-epp-key "2345" i-number 11))
+
+  (defun okj-key (i-number)
+    (abc-epp-key "2345" i-number 12))
+
+  (defun uvh-key (i-number)
+    (abc-epp-key "3456" i-number 0))
+
+  (defun ojm-key (i-number)
+    (abc-epp-key "3456" i-number 1))
+
+  (defun ulq-key (i-number)
+    (abc-epp-key "3456" i-number 2))
+
+  (defun otd-key (i-number)
+    (abc-epp-key "3456" i-number 3))
+
+  (defun uju-key (i-number)
+    (abc-epp-key "3456" i-number 4))
+
+  (defun olh-key (i-number)
+    (abc-epp-key "3456" i-number 5))
+
+  (defun uwy-key (i-number)
+    (abc-epp-key "3456" i-number 6))
+
+  (defun obw-key (i-number)
+    (abc-epp-key "3456" i-number 7))
+
+  (defun usl-key (i-number)
+    (abc-epp-key "3456" i-number 8))
+
+  (defun oyp-key (i-number)
+    (abc-epp-key "3456" i-number 9))
+
+  (defun ubv-key (i-number)
+    (abc-epp-key "3456" i-number 10))
+
+  (defun okq-key (i-number)
+    (abc-epp-key "3456" i-number 11))
+
+  (defun ukf-key (i-number)
+    (abc-epp-key "3456" i-number 12))
+
+  (defun okl-key (i-number)
+    (abc-epp-key "4567" i-number 0))
+
+  (defun uez-key (i-number)
+    (abc-epp-key "4567" i-number 1))
+
+  (defun oyw-key (i-number)
+    (abc-epp-key "4567" i-number 2))
+
+  (defun uef-key (i-number)
+    (abc-epp-key "4567" i-number 3))
+
+  (defun oub-key (i-number)
+    (abc-epp-key "4567" i-number 4))
+
+  (defun uqy-key (i-number)
+    (abc-epp-key "4567" i-number 5))
+#+END_SRC
