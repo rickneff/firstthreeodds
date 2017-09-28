@@ -12,7 +12,8 @@
     (let ((temp-buffer
            (url-retrieve-synchronously
             (format "http://firstthreeodds.org/%s" servlet-name) t t))
-          headers content)
+          headers
+          content)
       (with-current-buffer temp-buffer
         (unwind-protect
             (setq headers (eww-parse-headers)
