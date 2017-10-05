@@ -25,12 +25,20 @@
 #+BEGIN_SRC emacs-lisp :results silent :tangle yes
   (require 'org)
 
+  (defun get-tla-as-string (&optional tla-as-symbol) 
+    (downcase (if tla-as-symbol
+                  (symbol-name tla-as-symbol)
+                (org-entry-get (point) "ITEM"))))
+
   (defun get-hint (&optional tla-as-symbol)
-    (let ((tla (downcase
-                (if tla-as-symbol
-                    (symbol-name tla-as-symbol)
-                  (org-entry-get (point) "ITEM")))))
-      (call-fto-servlet (format "mebewiyo/book/hint/%s" tla))))
+    (call-fto-servlet
+     (format "mebewiyo/book/hint/%s"
+             (get-tla-as-string tla-as-symbol))))
+
+  (defun get-answer (key-as-number &optional tla-as-symbol)
+    (call-fto-servlet
+     (format "mebewiyo/book/answer/%s/%d"
+             (get-tla-as-string tla-as-symbol) key-as-number)))
 #+END_SRC
 
 * Test Old Hint
@@ -39,28 +47,53 @@
   (get-hint 'CRC)
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+  ,#+ATTR_HTML: :alt desert image :title What is this doing here?!
+  [[file:img/desert.jpg]]
+  This is the first of many exercises/problems/puzzles to come, always signified
+  by this type of yellow-background box. In every exercise box there will be a
+  text input box leading to hints and answers. (Metahint: Focus the cursor in
+  the input box and press Enter.)
+
+  Several questions have been posed already. Identify and answer them.
+:HINT:
+  - Hint :: Some of the questions are implied, rather than explicitly stated.
+            For example: What is the difference between /using/ a word and
+            /mentioning/ it? Or another example: What does \ldquo{}TLA ISA\rdquo mean?
+:END:
+,#+BEGIN_SRC emacs-lisp :exports results :results html
+  (insert-helpbox)
+,#+END_SRC
+#+end_example
+
 * Test New Hints
   Getting the TLA identifier from the enclosing org-entry ITEM:
 ** OQP
 #+BEGIN_SRC emacs-lisp
   (get-hint)
 #+END_SRC
+
 ** USV
 #+BEGIN_SRC emacs-lisp
   (get-hint)
 #+END_SRC
-** UGX
+
+** USV
 #+BEGIN_SRC emacs-lisp
   (get-hint)
 #+END_SRC
+
 ** UOX
 #+BEGIN_SRC emacs-lisp
   (get-hint)
 #+END_SRC
+
 ** OIO
 #+BEGIN_SRC emacs-lisp
   (get-hint)
 #+END_SRC
+
 ** UIJ
 #+BEGIN_SRC emacs-lisp
   (get-hint)
