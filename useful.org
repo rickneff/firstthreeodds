@@ -249,3 +249,267 @@
   (defun uqy-key (i-number)
     (abc-epp-key "4567" i-number 5))
 #+END_SRC
+
+* Getting DEF Answers
+
+  We need to preserve leading zeros in i-numbers, hence this special
+  list-of-digits function. And rotate-list-n is analogous to rot-n for strings.
+
+#+BEGIN_SRC emacs-lisp :results silent :tangle yes
+
+  (defun list-of-digits (n)
+    (let ((str (format (if (< n 1000000000) "%09d" "%018d") n)))
+      (mapcar (lambda (ch) (- ch ?0)) str)))
+
+  (defun rotate-list-n (lst n)
+    (setq n (mod n (length lst)))
+    (append (-take-last (- (length lst) n) lst) (-take n lst)))
+
+  (defun shuffle-list-n (lst n)
+    (loop repeat n
+          do (setq lst (apply 'shufflel (take-apart lst)))
+          finally return lst))
+
+  (defun def-epp-key (i-number rotate-n shuffle-n)
+    (let* ((prefix-digits (list 5 9 2 6 3 4 1 7 8))
+           (prefix-digits-rotated (rotate-list-n prefix-digits rotate-n))
+           (i-number-digits (list-of-digits i-number))
+           (all-digits (append prefix-digits-rotated i-number-digits))
+           (all-digits-shuffled (shuffle-list-n all-digits shuffle-n)))
+      (string-to-number
+       (apply 'format "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d" all-digits-shuffled))))
+
+  (defun tbd-key (i-number)
+    (def-epp-key i-number 1 0))
+
+  (defun wdk-key (i-number)
+    (def-epp-key i-number 1 1))
+
+  (defun tdr-key (i-number)
+    (def-epp-key i-number 1 2))
+
+  (defun wdt-key (i-number)
+    (def-epp-key i-number 1 3))
+
+  (defun teh-key (i-number)
+    (def-epp-key i-number 1 4))
+
+  (defun wfc-key (i-number)
+    (def-epp-key i-number 1 5))
+
+  (defun tej-key (i-number)
+    (def-epp-key i-number 1 6))
+
+  (defun wfk-key (i-number)
+    (def-epp-key i-number 1 7))
+
+  (defun ter-key (i-number)
+    (def-epp-key i-number 1 8))
+
+  (defun wgp-key (i-number)
+    (def-epp-key i-number 2 0))
+
+  (defun teu-key (i-number)
+    (def-epp-key i-number 2 1))
+
+  (defun wgw-key (i-number)
+    (def-epp-key i-number 2 2))
+
+  (defun tfv-key (i-number)
+    (def-epp-key i-number 2 3))
+
+  (defun wjs-key (i-number)
+    (def-epp-key i-number 2 4))
+
+  (defun tge-key (i-number)
+    (def-epp-key i-number 2 5))
+
+  (defun wkc-key (i-number)
+    (def-epp-key i-number 2 6))
+
+  (defun thp-key (i-number)
+    (def-epp-key i-number 2 7))
+
+  (defun wkm-key (i-number)
+    (def-epp-key i-number 2 8))
+
+  (defun tiw-key (i-number)
+    (def-epp-key i-number 3 0))
+
+  (defun wnw-key (i-number)
+    (def-epp-key i-number 3 1))
+
+  (defun tkg-key (i-number)
+    (def-epp-key i-number 3 2))
+
+  (defun wov-key (i-number)
+    (def-epp-key i-number 3 3))
+
+  (defun tme-key (i-number)
+    (def-epp-key i-number 3 4))
+
+  (defun wqw-key (i-number)
+    (def-epp-key i-number 3 5))
+
+  (defun tmz-key (i-number)
+    (def-epp-key i-number 3 6))
+
+  (defun wra-key (i-number)
+    (def-epp-key i-number 3 7))
+
+  (defun tnl-key (i-number)
+    (def-epp-key i-number 3 8))
+
+  (defun wrd-key (i-number)
+    (def-epp-key i-number 4 0))
+
+  (defun tnq-key (i-number)
+    (def-epp-key i-number 4 1))
+
+  (defun wrp-key (i-number)
+    (def-epp-key i-number 4 2))
+
+  (defun toj-key (i-number)
+    (def-epp-key i-number 4 3))
+
+  (defun wru-key (i-number)
+    (def-epp-key i-number 4 4))
+
+  (defun tol-key (i-number)
+    (def-epp-key i-number 4 5))
+
+  (defun wzo-key (i-number)
+    (def-epp-key i-number 4 6))
+
+  (defun tou-key (i-number)
+    (def-epp-key i-number 4 7))
+
+  (defun wyh-key (i-number)
+    (def-epp-key i-number 4 8))
+
+  (defun tli-key (i-number)
+    (def-epp-key i-number 5 0))
+
+  (defun wpi-key (i-number)
+    (def-epp-key i-number 5 1))
+
+  (defun tsd-key (i-number)
+    (def-epp-key i-number 5 2))
+
+  (defun wtm-key (i-number)
+    (def-epp-key i-number 5 3))
+
+  (defun ttv-key (i-number)
+    (def-epp-key i-number 5 4))
+
+  (defun wuz-key (i-number)
+    (def-epp-key i-number 5 5))
+
+  (defun wzm-key (i-number)
+    (def-epp-key i-number 5 6))
+
+  (defun tuk-key (i-number)
+    (def-epp-key i-number 5 7))
+
+  (defun wvq-key (i-number)
+    (def-epp-key i-number 5 8))
+
+  (defun tuq-key (i-number)
+    (def-epp-key i-number 6 0))
+
+  (defun wvu-key (i-number)
+    (def-epp-key i-number 6 1))
+
+  (defun tuw-key (i-number)
+    (def-epp-key i-number 6 2))
+
+  (defun wwd-key (i-number)
+    (def-epp-key i-number 6 3))
+
+  (defun tvl-key (i-number)
+    (def-epp-key i-number 6 4))
+
+  (defun wwr-key (i-number)
+    (def-epp-key i-number 6 5))
+
+  (defun twn-key (i-number)
+    (def-epp-key i-number 6 6))
+
+  (defun wws-key (i-number)
+    (def-epp-key i-number 6 7))
+
+  (defun txg-key (i-number)
+    (def-epp-key i-number 6 8))
+
+  (defun wzg-key (i-number)
+    (def-epp-key i-number 7 0))
+
+  (defun tkh-key (i-number)
+    (def-epp-key i-number 7 1))
+
+  (defun wue-key (i-number)
+    (def-epp-key i-number 7 2))
+#+END_SRC
+
+* For Your Consideration, Profit and Learning
+** EBQ
+
+  Here is a much better way that defines a function that returns the Cartesian
+  product of /three/ sets, and that also allows the sets to be of different
+  sizes:
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun cartesian-product-3 (s1 s2 s3)
+    (loop for i across s1
+          append (loop for j across s2
+                       append (loop for k across s3
+                                    collect (list i j k)))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (cartesian-product-3 [a b c d] [1 2] [x y z w t])
+#+END_SRC
+
+  We can do better still. The problem is to figure out how best to generalize
+  this to a Cartesian product of /n/ sets, again allowing for arbitrary sizes.
+
+*** A 9-line solution
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun mappend (fn &rest lsts)
+    "Maps fn over elements in lsts and finally appends all resulting lists."
+    (apply 'append (apply 'mapcar fn lsts)))
+
+  (defun cartesian-product (&rest lists)
+    (if (null lists)
+        (list nil)
+      (mappend (lambda (x)
+                 (mapcar (lambda (lst) (cons x lst))
+                         (apply 'cartesian-product (cdr lists))))
+       (car lists))))
+#+END_SRC
+
+*** A 13-line solution
+
+    This solution demonstrates the power of lisp in writing code that creates
+    other code:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun make-nested-loops-to-iterate-over-n-lists (n num-lists)
+    (if (= n num-lists)
+        (apply 'list 'list items)
+      (append (list 'loop 'for (get-current-item n) 'in (list 'nth n 'lists))
+              (list (if (< n (- num-lists 1)) 'append 'collect))
+              (list (make-nested-loops-to-iterate-over-n-lists (+ n 1) num-lists)))))
+
+  (defun get-current-item (n)
+    (let ((item (intern (format "i%d" n))))
+      (setq items (append items (list item)))
+      item))
+
+  (defun cart-prod (&rest lists)
+    (let ((items nil))
+      (eval (make-nested-loops-to-iterate-over-n-lists 0 (length lists)))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results raw 
+  (cart-prod '(a b) '(1 2 3) '(w x y z))
+#+END_SRC
