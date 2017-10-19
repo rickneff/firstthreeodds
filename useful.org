@@ -256,6 +256,16 @@
   list-of-digits function. And rotate-list-n is analogous to rot-n for strings.
 
 #+BEGIN_SRC emacs-lisp :results silent :tangle yes
+  (require 'dash)
+
+  (defun shufflel (l1 l2)
+    (apply 'append (mapcar* 'list l1 l2)))
+
+  (defun take-apart (l)
+    (let* ((len (length l))
+           (half-len (/ len 2.0)))
+      (list (-take (floor half-len) l)
+            (-take-last (ceiling half-len) l))))
 
   (defun list-of-digits (n)
     (let ((str (format (if (< n 1000000000) "%09d" "%018d") n)))
