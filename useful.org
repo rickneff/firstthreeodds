@@ -25,7 +25,7 @@
 #+BEGIN_SRC emacs-lisp :results silent :tangle yes
   (require 'org)
 
-  (defun get-tla-as-string (&optional tla-as-symbol) 
+  (defun get-tla-as-string (&optional tla-as-symbol)
     (downcase (if tla-as-symbol
                   (symbol-name tla-as-symbol)
                 (org-entry-get (point) "ITEM"))))
@@ -520,6 +520,54 @@
       (eval (make-nested-loops-to-iterate-over-n-lists 0 (length lists)))))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :results raw 
+#+BEGIN_SRC emacs-lisp :results raw
   (cart-prod '(a b) '(1 2 3) '(w x y z))
 #+END_SRC
+
+* A Last Entry
+
+  From now on, useful updates will be published as elisp packages, which, when
+  their availability is announced, can be retrieved by the following function:
+
+#+BEGIN_SRC emacs-lisp :results silent :tangle yes
+  (require 'cl)
+  (require 'eww)
+
+  (defun retrieve-package (package-name)
+    "Retrieves a given named package (string or symbol) from the server."
+    (let* ((package-directory (expand-file-name "~/.emacs.d/packages"))
+           (package-server-url "https://firstthreeodds.org/packages")
+           (already-retrieved-package-file (format "%s/%s.el" package-directory package-name))
+           (size-of-file (or (nth 7 (file-attributes already-retrieved-package-file)) 0))
+           (temp-buffer (url-retrieve-synchronously (format "%s/%s.el" package-server-url package-name) t t)))
+      (mkdir package-directory t)
+      (pushnew package-directory load-path)
+      (with-current-buffer temp-buffer
+        (unwind-protect
+            (let* ((headers (eww-parse-headers))
+                   (content-length (string-to-int (cdr (assoc "content-length" headers))))
+                   (end (point-max)))
+              (put 'retrieve-package :last-headers headers)
+              (unless (= size-of-file content-length)
+                ;; either not already retrieved, or else size has changed
+                (write-region (- end content-length) end already-retrieved-package-file)
+                (setq size-of-file content-length)))
+          (kill-buffer temp-buffer)))
+      size-of-file))
+#+END_SRC
+
+  For example, here is a useful package when in the mood to play with (small)
+  primes:
+#+BEGIN_SRC emacs-lisp
+  (retrieve-package 'first-ten-million-primes)
+#+END_SRC
+
+  Highly recommended reading: the endnote in [[http://firstthreeodds.org/mebewiyo/book/latest][The Book]] keyed by the phrase \ldquo{}just
+  use true and false\rdquo found in the very first paragraph of ABF.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'first-ten-million-primes)
+#+END_SRC
+
+  You decide how best to use this resource (the \ldquo{}first-ten-million-primes\rdquo{}
+  package) and feature (the =require= function).
