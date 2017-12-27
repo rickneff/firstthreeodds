@@ -327,6 +327,7 @@ you should place your code here."
      (python . t)
      (shell . t))))
  '(org-confirm-babel-evaluate t)
+ '(org-crypt-disable-auto-save (quote encrypt))
  '(org-pretty-entities t)
  '(package-archives
    (quote
