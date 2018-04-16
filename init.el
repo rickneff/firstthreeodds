@@ -336,8 +336,9 @@ you should place your code here."
      (java . t)
      (js . t)
      (python . t)
-     (R . t)
-     (shell . t))))
+     (shell . t)
+     (R . t))))
+ '(org-confirm-babel-evaluate t)
  '(org-crypt-disable-auto-save (quote encrypt))
  '(org-pretty-entities t)
  '(package-archives
