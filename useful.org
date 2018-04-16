@@ -1,6 +1,6 @@
-#+BEGIN_SRC emacs-lisp :results silent :tangle yes
-  (defun insert-emacs-lisp-src-block (&optional results-specifier)
-    (insert (format "#+BEGIN_SRC emacs-lisp%s\n\n#+END_SRC"
+#+BEGIN_SRC elisp :results silent :tangle yes
+  (defun insert-elisp-src-block (&optional results-specifier)
+    (insert (format "#+BEGIN_SRC elisp%s\n\n#+END_SRC"
                     (if results-specifier
                         (concat " :results " results-specifier)
                       "")))
@@ -15,19 +15,19 @@
     (insert "  "))
 
   (defun el ()
-    (insert-emacs-lisp-src-block))
+    (insert-elisp-src-block))
 
   (defun elr ()
-    (insert-emacs-lisp-src-block "raw"))
+    (insert-elisp-src-block "raw"))
 
   (defun els ()
-    (insert-emacs-lisp-src-block "silent"))
+    (insert-elisp-src-block "silent"))
 
   (defun elv ()
-    (insert-emacs-lisp-src-block "value"))
+    (insert-elisp-src-block "value"))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :results silent :tangle yes
+#+BEGIN_SRC elisp :results silent :tangle yes
   (require 'org-crypt)
   (org-crypt-use-before-save-magic)
 #+END_SRC
