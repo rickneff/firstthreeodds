@@ -28,6 +28,21 @@
 #+END_SRC
 
 #+BEGIN_SRC elisp :results silent :tangle yes
+  (defun compute-final-grade (list-of-grades)
+    "From list-of-grades compute weighted percentage and
+    convert to letter grade, returning both."
+    (let* ((weighted-percentage (apply '+ list-of-grades)) 
+           (number (ceiling weighted-percentage))
+           (tensDigit (/ number 10))
+           (onesDigit (mod number 10))
+           (index (min (max (- tensDigit 5) 0) 4))
+           (letter (substring "FDCBA" index (+ index 1)))
+           (sign (if (<= onesDigit 2) "-" (if (>= onesDigit 7) "+")))
+           (letter-grade (concat letter (if (and (< number 95) (>= number 60)) sign))))
+      (list (format "%2.2f" weighted-percentage) letter-grade)))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent :tangle yes
   (require 'org-crypt)
   (org-crypt-use-before-save-magic)
 #+END_SRC
