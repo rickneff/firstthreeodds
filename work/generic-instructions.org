@@ -3,7 +3,7 @@
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
 #+STARTUP: showeverything entitiespretty
-#+SETUPFILE: ../theme-bigblow.setup
+#+SETUPFILE: theme-bigblow.setup
 
 * Read and Learn
   Hints and rubrics (how to get points) for each gradebook item are available
