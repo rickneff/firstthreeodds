@@ -1,0 +1,24 @@
+#+TITLE: Time Considerations 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+* A Time For Everything 
+  As mentioned in the [[file:generic-instructions.org][generic-instructions.org]] file, you are encouraged to keep
+  track of how long you spend on reading the book and doing each EPP. This
+  should be *focused*, *concentrated* time --- so stop the clock before taking a
+  break (for any reason, especially unexpected interruptions). Org-mode makes it
+  easy to stop and restart timers.
+
+  One reason you would do well to carefully track your time is to avoid burnout.
+  In accordance with the standard \ldquo{}formula\rdquo (caveat --- only for an average
+  student seeking an average grade) that you should expect to spend two hours
+  outside of class for every hour in, you are not *expected* to work more than
+  10 hours per week on this class. (You are also not *forbidden* to work more
+  than that. Your choice.) Note that 10 hours is 8 hours in addition to the 2
+  you spend in class. That is *double* the outside-of-class hours of the
+  above-mentioned standard --- the reason being that this is a more demanding
+  course, and you are above-average students, or else you would not be seeking
+  the degrees you are.

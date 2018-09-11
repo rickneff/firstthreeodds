@@ -17,6 +17,9 @@
   (defun el ()
     (insert-elisp-src-block))
 
+  (defun elc ()
+    (insert-elisp-src-block "code"))
+
   (defun elr ()
     (insert-elisp-src-block "raw"))
 
@@ -43,6 +46,10 @@
 #+END_SRC
 
 #+BEGIN_SRC elisp :results silent :tangle yes
+  ;; We may want to do some cryptographic magic.
   (require 'org-crypt)
   (org-crypt-use-before-save-magic)
+  ;; Automatically Save Buffer Before Evaluating Code Blocks
+  ;; by adding 'save-buffer to the org-ctrl-c-ctrl-c-hook list.
+  (setq org-ctrl-c-ctrl-c-hook (cons 'save-buffer org-ctrl-c-ctrl-c-hook))
 #+END_SRC
