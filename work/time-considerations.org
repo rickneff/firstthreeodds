@@ -22,3 +22,32 @@
   above-mentioned standard --- the reason being that this is a more demanding
   course, and you are above-average students, or else you would not be seeking
   the degrees you are.
+
+* Advice for the Wise
+  As managing time well is crucial to success in life, BYU-Idaho has some
+  helpful advice here:
+
+  [[https://www.byui.edu/counseling-center/self-help/time-management]] 
+
+  Here is a quote from the STUDY HOURS FORMULA section:
+
+  To decide how many hours you need to study each week in order to get A\rsquo{}s, use
+  this rule of thumb:
+
+#+BEGIN_QUOTE
+   Study two hours per credit hour for a lighter class, three hours per credit
+   hour for an average class, and four hours per credit hour for a difficult
+   class.
+#+END_QUOTE
+
+   Most students consider this a difficult class, hence 4 hours per credit hour
+   equals 8 hours a week of study outside of class. Quoting again from the Time
+   Management page:
+
+   To ease your anxiety, remember that it is not only the quantity of study
+   time, but also the quality of study time that counts. This formula is just a
+   general guideline. You might try following it for a week, making adjustments
+   as needed.
+
+
+
