@@ -37,10 +37,11 @@
 
   - CHJ
 :HINT:
-  - Hint :: A \ldquo{}word\rdquo with no vowels is a clear winner of the smallest contest --
-            a VCR can\rsquo{}t be less than zero. So don\rsquo{}t count VCRs equal to zero.
-            That way, tying for first place at 1/3 would be \lsquo{}What\rsquo, \lsquo{}word\rsquo and
-            \lsquo{}smallest\rsquo.
+  - Hint :: A \ldquo{}word\rdquo with no vowels is a clear winner of the largest contest ---
+            a CVR can\rsquo{}t be more than infinity. So don\rsquo{}t count CVRs like that.
+            (That is why /finite/ was stipulated.) With that, tying for first
+            place at 3 (to 1) would be \lsquo{}What\rsquo and \lsquo{}word\rsquo, with CVR at 3 (to 0)
+            disqualified.
   - Also :: Count /y/ as a vowel, even when it is the first letter of a word.
 :END:
 
