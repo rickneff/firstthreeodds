@@ -161,22 +161,24 @@
 
   How to use this code to enter scores will be demonstrated in class.
 #+BEGIN_SRC elisp :results silent
+  (require 's)
+
   (defun weekly-EPPs (index)
     (elt [[[CRC DGZ]
            [CHJ DZB]
            [DOK CJF]]
           [[UCA ODS UGX OGR UWM OPZ UOX OTX UOT UIN OJL
-            UCG OQT UTQ UJU OLH UWY OBW USL OYP UBV]
+                UCG OQT UTQ UJU OLH UWY OBW USL OYP UBV]
            [OIM* OIO* UIJ OYU UOH OZD* UZM OOY* OKJ* UVH OJM*
-            ULQ* OTD OKQ* UKF OKL UEZ OYW* UEF* OUB UQY*]
+                 ULQ* OTD OKQ* UKF OKL UEZ OYW* UEF* OUB UQY*]
            [OQP USV UFZ]]
           [[TDR WDT TEJ WFK TER TGE THP WKM TIW TKG WOV WQW]
            [TBD* WDK* TEH WFC WGP WGW* TFV* WJS WKC WNW
-            TMZ TNL WRD TNQ]
+                 TMZ TNL WRD TNQ]
            [TEU TME WRA]]
           [[WRP TOJ WRU TOL TUK WVQ TUQ WVU TVL TXG]
            [WZO TOU WYH* TLI WPI TSD* WTM* TTV WUZ WZM* TUW
-            WWD* WWR* TWN* WWS WZG* TKH WUE]
+                WWD* WWR* TWN* WWS WZG* TKH WUE]
            [MMP]]
           [[MGX ECI ECT MKJ EFE MKL EFS MMC]
            [EBQ MHB MLB EJE* MLU* EKQ MON]
@@ -186,7 +188,7 @@
            [QKA RNC ROX]]
           [[FAB FDZ FJH IWK FOJ VAR VAY FQW VCR FRM]
            [ISM* FBH* ITT FDK* IVO* IWC IXT* FMD IYJ IZL FOY* VAO
-            FQI FQL* VEM FUA VFJ VGU FVH VGX FXI* VIB FYR VIW]
+                 FQI FQL* VEM FUA VFJ VGU FVH VGX FXI* VIB FYR VIW]
            [FJY FVF]]
           [[GMQ GMY JQA GRZ JYA GXF]
            [XAJ* JPZ XFO]
@@ -236,7 +238,7 @@
 
   (defun stringify (some-list pad)
     (format (concat (make-string pad ? ) "%s")
-      (mapconcat 'to-string some-list " ")))
+            (mapconcat 'to-string some-list " ")))
 
   (defun is-optional (TLA)
     (= 4 (length (symbol-name TLA))))
@@ -293,8 +295,8 @@
           Pr (/ (apply '+ (mapcar 'cdr PR)) 10.0 (length PR))
           Pu (/ (apply '+ (apply 'append (mapcar 'cdr PU))) 1.0 (length PU))
           raw-score (* Ex Pr)"
-          ;; extra-credit code
-          "
+            ;; extra-credit code
+            "
           extra-credit Pu"))
 
   (defun format-score-calculation-code (index)
@@ -306,34 +308,35 @@
               "not-found t")
             (format-rest-of-score-calculation-code) ?% ?#))
 
-  (defun find-assignment-number-in-buffer ()
+  (defun find-assignment-title-in-buffer ()
     (save-excursion
-      (goto-char
-       (point-min))
-      (let ((dot (search-forward "." nil t)))
-        (if dot
-            (string-to-number
-             (buffer-substring-no-properties (- dot 2) (+ dot 1)))
+      (goto-char (point-min))
+      (let ((colon (search-forward ":" nil t)))
+        (if colon
+            (s-trim (buffer-substring-no-properties
+                     (+ colon 1)
+                     (progn (end-of-line) (point))))
           1234))))
 
   (defun lookup-assignment-index ()
     (cdr
      (assoc
-      (find-assignment-number-in-buffer)
-      '((1.3 . 0)
-        (2.2 . 1)
-        (3.2 . 2)
-        (3.3 . 3)
-        (4.2 . 4)
-        (5.2 . 5)
-        (6.2 . 6)
-        (7.2 . 7)
-        (8.2 . 8)
-        (9.2 . 9)
-        (10.2 . 10)
-        (11.2 . 11)
-        (12.2 . 12)
-        (13.2 . 13)))))
+      (find-assignment-title-in-buffer)
+      '(("DM1 Assignment 01.3" . 0)
+        ("ABC Sets and Logic" . 1)
+        ("DEF Functions I" . 2)
+        ("DEF Functions II" . 3)
+        ("GHI Relations" . 4)
+        ("JKL Counting & Probability" . 5)
+        ("MNO Number Theory I" . 6)
+        ("PQR Number Theory II" . 7)
+        ("PQR Number Theory III" . 8)
+        ("STU Trees I" . 9)
+        ("STU Trees II" . 10)
+        ("VWX Graphs I" . 11)
+        ("VWX Graphs II" . 12)
+        ("YZ@ Languages and Grammars" . 13)
+        (1234)))))
 
   (defun insert-score-calculation-code ()
     "Insert score calculation code."
