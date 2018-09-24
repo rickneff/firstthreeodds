@@ -94,8 +94,8 @@
 
   These are explained below. The calculation for the \ldquo{}cooked\rdquo score entered into
   the gradebook is:
-#+BEGIN_SRC emacs-lisp
-  (+ (* Ex Pr) Pu)
+#+BEGIN_SRC elisp
+  (* (+ (* Ex Pr) Pu) 100.0)
 #+END_SRC
 
   Note that all cooked scores are normalized to 100 points possible. You will
@@ -162,10 +162,7 @@
   How to use this code to enter scores will be demonstrated in class.
 #+BEGIN_SRC elisp :results silent
   (defun weekly-EPPs (index)
-    (elt [[[] ; element 0 is empty, as
-           [] ; week now start numbering at 1
-           []]
-          [[CRC DGZ]
+    (elt [[[CRC DGZ]
            [CHJ DZB]
            [DOK CJF]]
           [[UCA ODS UGX OGR UWM OPZ UOX OTX UOT UIN OJL
@@ -192,8 +189,11 @@
             FQI FQL* VEM FUA VFJ VGU FVH VGX FXI* VIB FYR VIW]
            [FJY FVF]]
           [[GMQ GMY JQA GRZ JYA GXF]
-           [XAJ* JPZ XFO GYN XGG]
+           [XAJ* JPZ XFO]
            [GYI]]
+          [[GYN]
+           [XGG]
+           [None]]
           [[LDA SQI LJP YGT LUM]
            [SUF LNR LDO YCF YZU]
            [None]]
@@ -238,6 +238,9 @@
     (format (concat (make-string pad ? ) "%s")
       (mapconcat 'to-string some-list " ")))
 
+  (defun is-optional (TLA)
+    (= 4 (length (symbol-name TLA))))
+
   (defun record-symbol-type (symbol type)
     (put symbol :type type)
     symbol)
@@ -254,7 +257,7 @@
       (mapcar 'cons-with-zero
               (mapcar 'remove-if-null
                       (split-list
-                       (remove-if 'optional
+                       (remove-if 'is-optional
                                   (record-symbols-types vector-of-symbols type))
                        6)))
       (cons 0 (make-list 10 13)))
@@ -277,7 +280,7 @@
                (cons 0 (make-list 5 13))))
      "\n"))
 
-  (defun format-weekly-EPPs (&optional week-NN)
+  (defun format-weekly-EPPs (week-NN)
     (let ((week-NN-EPPs (weekly-EPPs week-NN)))
       (format "EX '(%s)\n        PR '(%s)\n        PU '(%s)"
               (format-exercises-or-problems (elt week-NN-EPPs 0) 'Exercise)
@@ -294,12 +297,43 @@
           "
           extra-credit Pu"))
 
-  (defun format-score-calculation-code (file-key-entry)
+  (defun format-score-calculation-code (index)
     (format "\n#+BEGIN_SRC elisp :results raw\n  (setq %s %s
-          score (* Tt (+ raw-score extra-credit))
+          score (* (+ raw-score extra-credit) 100.0)
           displayed-score (format \"#+SCORE: %c3.2f\\n\" score))\n%c+END_SRC\n"
-            (or (eval (nth 1 file-key-entry)) "not-found t")
+            (if (integerp index)
+                (format-weekly-EPPs index)
+              "not-found t")
             (format-rest-of-score-calculation-code) ?% ?#))
+
+  (defun find-assignment-number-in-buffer ()
+    (save-excursion
+      (goto-char
+       (point-min))
+      (let ((dot (search-forward "." nil t)))
+        (if dot
+            (string-to-number
+             (buffer-substring-no-properties (- dot 2) (+ dot 1)))
+          1234))))
+
+  (defun lookup-assignment-index ()
+    (cdr
+     (assoc
+      (find-assignment-number-in-buffer)
+      '((1.3 . 0)
+        (2.2 . 1)
+        (3.2 . 2)
+        (3.3 . 3)
+        (4.2 . 4)
+        (5.2 . 5)
+        (6.2 . 6)
+        (7.2 . 7)
+        (8.2 . 8)
+        (9.2 . 9)
+        (10.2 . 10)
+        (11.2 . 11)
+        (12.2 . 12)
+        (13.2 . 13)))))
 
   (defun insert-score-calculation-code ()
     "Insert score calculation code."
@@ -307,10 +341,10 @@
     (while (not (looking-at "^$"))
       (forward-line 1))
     (insert (format-score-calculation-code
-             (lookup-file-key-entry (intern (file-name-base (buffer-file-name)))))))
+             (lookup-assignment-index))))
 
   (defun clear-vars ()
-    (mapc 'makunbound '(EX Ex PR Pr Pu raw-score extra-credit score)))
+    (mapc 'makunbound '(EX Ex PR Pr Pu raw-score extra-credit score displayed-score)))
 
   (defun iscc ()
     (interactive)
