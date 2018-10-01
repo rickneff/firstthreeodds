@@ -55,12 +55,12 @@
 #+END_SRC
 
 #+BEGIN_SRC elisp :results silent :tangle yes
-    (defun relocate-file-to-work-folder ()
-      (let* ((work-folder (or (getenv "WORK")
-                              (concat (getenv "HOME") "/.spacemacs.d/work")))
-             (this-file-name (file-name-nondirectory (buffer-file-name)))
-             (dest-file-name (concat work-folder "/" this-file-name)))
-        (rename-file this-file-name dest-file-name)
-        (find-alternate-file dest-file-name)
-        dest-file-name))
+  (defun relocate-file-to-work-folder ()
+    (let* ((work-folder (or (getenv "WORK")
+                            (concat (getenv "HOME") "/.spacemacs.d/work")))
+           (this-file-name (file-name-nondirectory (buffer-file-name)))
+           (dest-file-name (concat work-folder "/" this-file-name)))
+      (rename-file this-file-name dest-file-name)
+      (find-alternate-file dest-file-name)
+      dest-file-name))
 #+END_SRC
