@@ -1,0 +1,26 @@
+#+TITLE: dm1 layer
+
+# The maximum height of the logo should be 200 pixels.
+[[img/dm1.png]]
+
+# TOC links should be GitHub style anchors.
+* Table of Contents                                        :TOC_4_gh:noexport:
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+
+* Description
+This layer includes three packages: 
+  - first-ten-million-primes
+  - test-rns
+  - bigal
+
+* Install
+To use this configuration layer, add it to your =~/.spacemacs.d/init.el= file.
+You will need to add =dm1= to the existing =dotspacemacs-configuration-layers=
+list in this file.
+
+* Key bindings
+| Key Binding | Description      |
+|-------------+------------------|
+| ~SPC x x x~ | Does nothing yet |
