@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst dm1-packages
-  '(first-ten-million-primes test-rns bigal)
+  '(first-ten-million-primes test-rns bigal ob-erlang)
   "The list of Lisp packages required by the dm1 layer.
 
 Each entry is either:
