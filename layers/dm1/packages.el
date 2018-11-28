@@ -64,4 +64,6 @@ Each entry is either:
 
 (defun dm1/init-bigal ())
 
+(defun dm1/init-ob-erlang ())
+
 ;;; packages.el ends here
