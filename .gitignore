@@ -1,3 +1,6 @@
 /.DS_Store
 *.el
 *.elisp
+*.html
+*.tex
+*.pdf

@@ -41,7 +41,9 @@
   Note that, again for your convenience, one of these links will appear in every
   file.
 
-* How To Avoid MIsery by Taking Care of the Mechanics
+* How To Avoid MIsery
+  Take Care of the Mechanics! (And yes, the MI in MIsery was intentional!)
+
   Do you take pride in your writing? Enough to free it of *mechanical
   infelicities* (MIs --- e.g., misspelled words, grammatical errors, punctuation
   errors, formatting errors)?

@@ -2,7 +2,7 @@
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything entitiespretty
+#+STARTUP: entitiespretty
 #+SETUPFILE: theme-bigblow.setup
 
 * A Time For Everything 
