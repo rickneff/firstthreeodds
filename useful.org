@@ -20,6 +20,9 @@
   (defun elc ()
     (insert-elisp-src-block "code"))
 
+  (defun elo ()
+    (insert-elisp-src-block "output"))
+
   (defun elr ()
     (insert-elisp-src-block "raw"))
 
@@ -28,39 +31,18 @@
 
   (defun elv ()
     (insert-elisp-src-block "value"))
-#+END_SRC
 
-#+BEGIN_SRC elisp :results silent :tangle yes
-  (defun compute-final-grade (list-of-grades)
-    "From list-of-grades compute weighted percentage and
-    convert to letter grade, returning both."
-    (let* ((weighted-percentage (apply '+ list-of-grades)) 
-           (number (ceiling weighted-percentage))
-           (tensDigit (/ number 10))
-           (onesDigit (mod number 10))
-           (index (min (max (- tensDigit 5) 0) 4))
-           (letter (substring "FDCBA" index (+ index 1)))
-           (sign (if (<= onesDigit 2) "-" (if (>= onesDigit 7) "+")))
-           (letter-grade (concat letter (if (and (< number 95) (>= number 60)) sign))))
-      (list (format "%2.2f" weighted-percentage) letter-grade)))
-#+END_SRC
-
-#+BEGIN_SRC elisp :results silent :tangle yes
-  ;; We may want to do some cryptographic magic.
-  (require 'org-crypt)
-  (org-crypt-use-before-save-magic)
-  ;; Automatically Save Buffer Before Evaluating Code Blocks
-  ;; by adding 'save-buffer to the org-ctrl-c-ctrl-c-hook list.
-  (setq org-ctrl-c-ctrl-c-hook (cons 'save-buffer org-ctrl-c-ctrl-c-hook))
-#+END_SRC
-
-#+BEGIN_SRC elisp :results silent :tangle yes
   (defun relocate-file-to-work-folder ()
     (let* ((work-folder (or (getenv "WORK")
-                            (concat (getenv "HOME") "/.spacemacs.d/work")))
+                            (concat (getenv "HOME") "/work")))
            (this-file-name (file-name-nondirectory (buffer-file-name)))
            (dest-file-name (concat work-folder "/" this-file-name)))
       (rename-file this-file-name dest-file-name)
       (find-alternate-file dest-file-name)
       dest-file-name))
+
+  ;; Automatically Save Buffer Before Evaluating Code Blocks
+  ;; by adding 'save-buffer to the org-ctrl-c-ctrl-c-hook list.
+  (require 'org)
+  (setq org-ctrl-c-ctrl-c-hook (cons 'save-buffer org-ctrl-c-ctrl-c-hook))
 #+END_SRC

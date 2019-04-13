@@ -320,8 +320,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (require 'cl)
   (require 'dash)
+  (require 'dash-functional)
   (require 'helm-bookmark)
   (require 'org)
+  (require 'org-crypt)
   (require 'ob)
   (apply 'load-file (org-babel-tangle-file "~/.spacemacs.d/useful.org"))
   )

@@ -6,10 +6,7 @@
 #+SETUPFILE: theme-bigblow.setup
 
 * Read and Learn
-  Hints and rubrics (how to get points) for each gradebook item are available
-  --- come to class to learn how to access them.
-
-  Time Hint: To get maximum time-management benefit, you are encouraged to:
+  To get maximum time-management benefit, you are encouraged to:
   - track your time for each task (TODO);
   - mark each task DONE when done (type t to toggle its state); and
   - maintain a time-tracking summary report.
@@ -43,3 +40,16 @@
 
   Note that, again for your convenience, one of these links will appear in every
   file.
+
+* How To Avoid MIsery by Taking Care of the Mechanics
+  Do you take pride in your writing? Enough to free it of *mechanical
+  infelicities* (MIs --- e.g., misspelled words, grammatical errors, punctuation
+  errors, formatting errors)?
+
+  Even if you are hard pressed to produce good solutions, you can always take
+  steps to eliminate MIs in the solutions you do write up, for example:
+
+  1. Spell-check and grammar-check your writing. (Have you heard of Grammarly?)
+  2. Read your writing aloud (or better yet, have someone else read it to you)
+     to see how it sounds.
+  3. Have someone who is good at English carefully proofread your writing.

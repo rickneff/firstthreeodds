@@ -1,0 +1,117 @@
+#+TITLE: Time Considerations 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+* A Time For Everything 
+  As mentioned in the [[file:generic-instructions.org][generic-instructions.org]] file, you are encouraged to keep
+  track of how long you spend on reading the book and doing each EPP. This
+  should be *focused*, *concentrated* time --- so stop the clock before taking a
+  break (for any reason, especially unexpected interruptions). Org-mode makes it
+  easy to stop and restart timers.
+
+  One reason you would do well to carefully track your time is to avoid burnout.
+  In accordance with the standard \ldquo{}formula\rdquo (caveat --- only for an average
+  student seeking an average grade) that you should expect to spend two hours
+  outside of class for every hour in, you are not *expected* to work more than
+  10 hours per week on this class. (You are also not *forbidden* to work more
+  than that. Your choice.) Note that 10 hours is 8 hours in addition to the 2
+  you spend in class. That is *double* the outside-of-class hours of the
+  above-mentioned standard --- the reason being that this is a more demanding
+  course, and you are above-average students, or else you would not be seeking
+  the degrees you are.
+
+* Advice for the Wise
+  As managing time well is crucial to success in life, BYU-Idaho has some
+  helpful advice here:
+
+  [[https://www.byui.edu/counseling-center/self-help/time-management]] 
+
+  Here is a quote from the STUDY HOURS FORMULA section:
+
+  To decide how many hours you need to study each week in order to get A\rsquo{}s, use
+  this rule of thumb:
+
+#+BEGIN_QUOTE
+   Study two hours per credit hour for a lighter class, three hours per credit
+   hour for an average class, and four hours per credit hour for a difficult
+   class.
+#+END_QUOTE
+
+   Most students consider this a difficult class, hence 4 hours per credit hour
+   equals 8 hours a week of study outside of class. Quoting again from the Time
+   Management page:
+
+   To ease your anxiety, remember that it is not only the quantity of study
+   time, but also the quality of study time that counts. This formula is just a
+   general guideline. You might try following it for a week, making adjustments
+   as needed.
+
+* Hints for Your First Assignment
+  
+  First, a Hint about Hints:
+
+  With your cursor on a :HINT: line, pressing TAB will toggle the open/close
+  state of these \ldquo{}drawers\rdquo, as org-mode refers to them.
+
+  They are all closed when you first open this file. Open them only after you
+  take the opportunity to see how far you can get without them.
+
+  Also, at the top of this file note the \ldquo{}not\rdquo in the first #+OPTIONS: header.
+  This controls the invisibility of the HINT drawers when exporting this org
+  file to html, which you can do by the following key sequence:
+
+#+BEGIN_EXAMPLE
+  , e e h o
+#+END_EXAMPLE
+
+  - CRC
+:HINT:
+  - Hint :: Do not be picky about the wording \ldquo{}There is no right answer\rdquo, which
+            could be interpreted as \ldquo{}There is no answer that you could give that
+            would be right.\rdquo That would be a misinterpretation.
+:END:
+
+  - DGZ
+:HINT:
+  - Hint :: Lewis Carroll is your friend here.
+:END:
+
+  - CHJ
+:HINT:
+  - Hint :: A \ldquo{}word\rdquo with no vowels is a clear winner of the largest contest ---
+            a CVR can\rsquo{}t be more than infinity. So don\rsquo{}t count CVRs like that.
+            (That is why /finite/ was stipulated.) With that, tying for first
+            place at 3 (to 1) would be \lsquo{}What\rsquo and \lsquo{}word\rsquo, with CVR at 3 (to 0)
+            disqualified.
+  - Also :: Count /y/ as a vowel, even when it is the first letter of a word.
+:END:
+
+  - DZB
+:HINT:
+  - Hint :: Another name for this problem is the /Limiting Radius/ problem, and
+            a /trigonometric approach/ to it is suggested by this image:
+
+            [[https://rickneff.github.io/img/limiting-radius-problem-solution-attempt.png]]
+:END:
+
+  - DOK
+:HINT:
+  - Hint :: In case it wasn\rsquo{}t clear, you are being asked to form the product of
+            3 numbers. And to do that over and over again, as many times as it
+            takes.
+  - Hint :: Try dividing all the products by 6.
+  - Time Hint :: There is another connection to be made, but to pursue this
+                 quest is potentially time-consuming.
+:END:
+
+  - CJF
+:HINT:
+  - Hint :: Split the 6-digit number into two 3-digit numbers, and think of the
+            word CLOCK (what CLAHCK really should be) as a sequence of 5 letters:
+: 654 321
+:
+: C L O C K
+:END:
