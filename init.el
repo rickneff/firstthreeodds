@@ -320,7 +320,6 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (require 'cl)
   (require 'dash)
-  (require 'dash-functional)
   (require 'helm-bookmark)
   (require 'org)
   (require 'org-crypt)
@@ -351,6 +350,11 @@ you should place your code here."
  '(org-confirm-elisp-link-function nil)
  '(org-crypt-disable-auto-save (quote encrypt))
  '(org-pretty-entities t)
+ '(org-enable-reveal-js-support t)
+ '(org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
+ '(org-reveal-title-slide 'auto)
+ '(org-hide-emphasis-markers t) ;; show actually italicized text instead of /italicized text/
+ '(org-babel-results-keyword "results")
  '(package-archives
    (quote
     (("melpa" . "https://melpa.org/packages/")

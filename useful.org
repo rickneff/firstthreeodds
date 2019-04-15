@@ -1,6 +1,6 @@
-#+BEGIN_SRC elisp :results silent :tangle yes
+#+begin_src elisp :results silent :tangle yes
   (defun insert-elisp-src-block (&optional results-specifier)
-    (insert (format "#+BEGIN_SRC elisp%s\n\n#+END_SRC"
+    (insert (format "#+begin_src elisp%s\n\n#+end_src"
                     (if results-specifier
                         (concat " :results " results-specifier)
                       "")))
@@ -146,6 +146,13 @@
   ;; by adding 'save-buffer to the org-ctrl-c-ctrl-c-hook list.
   (require 'org)
   (setq org-ctrl-c-ctrl-c-hook (cons 'save-buffer org-ctrl-c-ctrl-c-hook))
-#+END_SRC
+
+  (defun dm/display-inline-images ()
+    (condition-case t
+      (org-display-inline-images)
+      (error nil)))
+
+  (add-hook 'org-babel-after-execute-hook 'dm/display-inline-images 'append)
+#+end_src
 
 [[elisp:(recreate-file%20work-zip-in-base64%20"work.zip")][Recreate work.zip File]]
