@@ -37,6 +37,7 @@
                             (concat (getenv "HOME") "/work")))
            (this-file-name (file-name-nondirectory (buffer-file-name)))
            (dest-file-name (concat work-folder "/" this-file-name)))
+      (mkdir work-folder t)
       (if copy-not-move
           (copy-file this-file-name dest-file-name t)
         (rename-file this-file-name dest-file-name))
@@ -49,6 +50,8 @@
                     (length base64-encoded-contents) filename)
       (when insert-link
         (end-of-line)
+        (when (stringp insert-link)
+          (insert (concat "\n" insert-link)))
         (insert (concat "\n[[file:" filename "]]\n"))
         ;; just in case it is an image file
         (org-display-inline-images))
