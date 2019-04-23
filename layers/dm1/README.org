@@ -10,10 +10,11 @@
 - [[#key-bindings][Key bindings]]
 
 * Description
-This layer includes three packages: 
+This layer includes four packages:
   - first-ten-million-primes
   - test-rns
   - bigal
+  - google-this
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs.d/init.el= file.
