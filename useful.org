@@ -1,4 +1,7 @@
-#+begin_src elisp :results silent :tangle yes
+#+name: code
+#+begin_src elisp :results silent
+  (require 'org)
+
   (defun insert-elisp-src-block (&optional results-specifier)
     (insert (format "#+begin_src elisp%s\n\n#+end_src"
                     (if results-specifier
@@ -44,116 +47,23 @@
       (find-alternate-file dest-file-name)
       dest-file-name))
 
-  (defun base64-encode (filename)
-    (if (file-readable-p filename)
-        (with-temp-buffer
-          (insert-file-contents filename)
-          (base64-encode-region (point-min) (point-max))
-          (buffer-substring (point-min) (point-max)))
-      ;; else maybe filename is a string we want to encode
-      (base64-encode-string filename)))
-
-  (defun recreate-file (base64-encoded-contents filename &optional insert-link)
-    (let ((coding-system-for-write 'no-conversion-multibyte))
-      (write-region (base64-decode-string base64-encoded-contents)
-                    (length base64-encoded-contents) filename)
-      (when insert-link
-        (end-of-line)
-        (when (stringp insert-link)
-          (insert (concat "\n" insert-link)))
-        (insert (concat "\n[[file:" filename "]]\n"))
-        ;; just in case it is an image file
-        (org-display-inline-images))
-      filename))
-
-  (setq work-zip-in-base64 "
-  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
-  ")
+  (defun calculate-score (possible-points-alist)
+    (loop with named-list-alist =
+          (org-element-map (org-element-parse-buffer) 'plain-list
+            (lambda (plain-list) (cons (org-element-property :name plain-list)
+                                       (org-element-property :structure plain-list))))
+          for (category-symbol . category-points) in possible-points-alist
+          sum (loop for checked in
+                    (loop for el in
+                          (cdr (assoc (concat "assertions-" (symbol-name category-symbol))
+                                      named-list-alist))
+                          collect (string= (nth 4 el) "[X]"))
+                    for points in category-points
+                    when checked
+                    sum points)))
 
   ;; automatically save buffer before evaluating code blocks
   ;; by adding 'save-buffer to the org-ctrl-c-ctrl-c-hook list.
-  (require 'org)
   (setq org-ctrl-c-ctrl-c-hook (cons 'save-buffer org-ctrl-c-ctrl-c-hook))
 
   (defun dm/display-inline-images ()
@@ -163,5 +73,3 @@
 
   (add-hook 'org-babel-after-execute-hook 'dm/display-inline-images 'append)
 #+end_src
-
-[[elisp:(recreate-file%20work-zip-in-base64%20"work.zip")][Recreate work.zip File]]

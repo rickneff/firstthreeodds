@@ -1,0 +1,66 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/bigblow.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/hideshow.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.localscroll-min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.zclip.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/bigblow.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/hideshow.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript">document.helps = [];</script>
+#+HTML_HEAD: <script type="text/javascript">
+#+HTML_HEAD:    function draw(levels) {
+#+HTML_HEAD:      var c = document.getElementById("btree");
+#+HTML_HEAD:      var w = c.width;
+#+HTML_HEAD:      var h = c.height;
+#+HTML_HEAD:      var ctx = c.getContext("2d");
+#+HTML_HEAD:
+#+HTML_HEAD:      var repeat_delay = 3000;
+#+HTML_HEAD:      var teardown_delay = 1000;
+#+HTML_HEAD:      var level_delay = 500;
+#+HTML_HEAD:
+#+HTML_HEAD:      var margins = 10;
+#+HTML_HEAD:
+#+HTML_HEAD:      // If h_frac is changed, slope will need to be adjusted to
+#+HTML_HEAD:      // prevent overlap.  I might fix this in the future.
+#+HTML_HEAD:      var h_frac = 2;
+#+HTML_HEAD:      var slope = ((h - margins * 2) / 2) / (w - margins * 2);
+#+HTML_HEAD:
+#+HTML_HEAD:      ctx.clearRect(0, 0, w, h);
+#+HTML_HEAD:
+#+HTML_HEAD:      // This goes in here so that above variables will be in scope
+#+HTML_HEAD:      function lines(dist, loc, depth, delay=0) {
+#+HTML_HEAD:        function render_lines(dist, loc) {
+#+HTML_HEAD:          ctx.beginPath();
+#+HTML_HEAD:          ctx.moveTo(loc[0], loc[1]);
+#+HTML_HEAD:          ctx.lineTo(loc[0] + dist, loc[1] + slope * -dist);
+#+HTML_HEAD:          ctx.moveTo(loc[0], loc[1]);
+#+HTML_HEAD:          ctx.lineTo(loc[0] + dist, loc[1] + slope * dist);
+#+HTML_HEAD:          ctx.stroke();
+#+HTML_HEAD:        }
+#+HTML_HEAD:
+#+HTML_HEAD:        setTimeout(render_lines, delay, dist, loc);
+#+HTML_HEAD:        setTimeout(function (x) {ctx.clearRect(x, 0, w, h)},
+#+HTML_HEAD:                   level_delay * levels * 2 + teardown_delay - delay,
+#+HTML_HEAD:                   loc[0]);
+#+HTML_HEAD:
+#+HTML_HEAD:        depth--;
+#+HTML_HEAD:        if (depth) {
+#+HTML_HEAD:          lines((dist / h_frac) * (h_frac - 1),
+#+HTML_HEAD:                [loc[0] + dist, loc[1] + slope * -dist],
+#+HTML_HEAD:                depth,
+#+HTML_HEAD:                delay + level_delay);
+#+HTML_HEAD:          lines((dist / h_frac) * (h_frac - 1),
+#+HTML_HEAD:                [loc[0] + dist, loc[1] + slope *  dist],
+#+HTML_HEAD:                depth,
+#+HTML_HEAD:                delay + level_delay);
+#+HTML_HEAD:        }
+#+HTML_HEAD:      }
+#+HTML_HEAD:
+#+HTML_HEAD:      lines((w - margins * 2) / h_frac, [margins, h/2], levels);
+#+HTML_HEAD:
+#+HTML_HEAD:      setTimeout(draw, repeat_delay + teardown_delay + levels * level_delay * 2, levels);
+#+HTML_HEAD:    }
+#+HTML_HEAD:  </script>

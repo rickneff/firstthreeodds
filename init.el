@@ -324,7 +324,7 @@ you should place your code here."
   (require 'org)
   (require 'org-crypt)
   (require 'ob)
-  (apply 'load-file (org-babel-tangle-file "~/.spacemacs.d/useful.org"))
+  (org-sbe "~/.spacemacs.d/useful.org:code")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
