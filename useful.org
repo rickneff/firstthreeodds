@@ -44,6 +44,15 @@
       (find-alternate-file dest-file-name)
       dest-file-name))
 
+  (defun base64-encode (filename)
+    (if (file-readable-p filename)
+        (with-temp-buffer
+          (insert-file-contents filename)
+          (base64-encode-region (point-min) (point-max))
+          (buffer-substring (point-min) (point-max)))
+      ;; else maybe filename is a string we want to encode
+      (base64-encode-string filename)))
+
   (defun recreate-file (base64-encoded-contents filename &optional insert-link)
     (let ((coding-system-for-write 'no-conversion-multibyte))
       (write-region (base64-decode-string base64-encoded-contents)
