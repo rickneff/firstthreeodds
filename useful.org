@@ -79,7 +79,7 @@
                     (gnu/linux "~/.bashrc")
                     (t "nonexistent")))
             (store-work-environment-variable env-setting-file dir)
-          (set-work-environment-varible dir)))))
+          (set-work-environment-variable dir)))))
 
   (defun store-work-environment-variable (env-setting-file dir)
     (with-temp-buffer
