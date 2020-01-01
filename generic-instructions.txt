@@ -1,9 +1,10 @@
-#+TITLE: Generic Instructions 
-#+LANGUAGE: en
-#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
-#+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything entitiespretty
-#+SETUPFILE: theme-bigblow.setup
+-*- mode: org -*-
+#+title: Generic Instructions
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+options: html-postamble:nil
+#+startup: showeverything entitiespretty
+#+setupfile: theme-bigblow.setup
 
 * Read and Learn
   To get maximum time-management benefit, you are encouraged to:
@@ -25,7 +26,7 @@
   For example, the bullets below specify two tasks you can practice on. For more
   advice, see the [[file:time-considerations.org][time-considerations.org]] file.
 
-* TODO Reading Assignment 
+* TODO Reading Assignment
   Read the textbook\rsquo{}s introductory material (everything before ABC --- which
   means everything up to and including section ONE subsubsection ONI, which ends
   just when subsection ABC begins).
