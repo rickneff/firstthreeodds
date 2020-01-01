@@ -7,7 +7,7 @@
 #+setupfile: theme-bigblow.setup
 
 * A Time For Everything
-  As mentioned in the [[file:generic-instructions.org][generic-instructions.org]] file, you are encouraged to keep
+  As mentioned in the [[file:generic-instructions.txt][generic-instructions.txt]] file, you are encouraged to keep
   track of how long you spend on reading the book and doing each EPP. This
   should be *focused*, *concentrated* time --- so stop the clock before taking a
   break (for any reason, especially unexpected interruptions). Org-mode makes it

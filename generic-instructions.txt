@@ -24,7 +24,7 @@
   [[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
 
   For example, the bullets below specify two tasks you can practice on. For more
-  advice, see the [[file:time-considerations.org][time-considerations.org]] file.
+  advice, see the [[file:time-considerations.txt][time-considerations.txt]] file.
 
 * TODO Reading Assignment
   Read the textbook\rsquo{}s introductory material (everything before ABC --- which
