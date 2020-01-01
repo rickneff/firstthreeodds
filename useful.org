@@ -1,15 +1,18 @@
+#+title: Useful Stuff
+#+language: en
+
 #+name: code
 #+begin_src elisp :results silent
   (require 'org)
 
-  (defun insert-elisp-src-block (&optional results-specifier)
-    (insert (format "#+begin_src elisp%s\n\n#+end_src"
+  (defun insert-src-block (lang look &optional results-specifier)
+    (insert (format "#+begin_src %s%s\n\n#+end_src" lang
                     (if results-specifier
                         (concat " :results " results-specifier)
                       "")))
     (forward-line -3)
     (beginning-of-line)
-    (if (looking-at "(el")
+    (if (looking-at look)
         (progn
           (kill-line)
           (delete-char 1)
@@ -18,34 +21,114 @@
     (insert "  "))
 
   (defun el ()
-    (insert-elisp-src-block))
+    (insert-src-block "elisp" "(el"))
 
   (defun elc ()
-    (insert-elisp-src-block "code"))
+    (insert-src-block "elisp" "(el" "code"))
 
   (defun elo ()
-    (insert-elisp-src-block "output"))
+    (insert-src-block "elisp" "(el" "output"))
 
   (defun elr ()
-    (insert-elisp-src-block "raw"))
+    (insert-src-block "elisp" "(el" "raw"))
 
   (defun els ()
-    (insert-elisp-src-block "silent"))
+    (insert-src-block "elisp" "(el" "silent"))
 
   (defun elv ()
-    (insert-elisp-src-block "value"))
+    (insert-src-block "elisp" "(el" "value"))
+
+  (defun sh ()
+    (insert-src-block "sh" "(sh"))
+
+  (defun sho ()
+    (insert-src-block "sh" "(sh" "output"))
+
+  (defun shs ()
+    (insert-src-block "sh" "(sh" "silent"))
+
+  (defun insert-org-file-header (title)
+    (interactive "sEnter title: ")
+    (insert "-*- mode: org -*-\n#+title: ")
+    (insert title)
+    (insert "
+#+language: en
+#+options: H:4 num:nil toc:nil \\n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \"HINT\")
+#+options: html-postamble:nil
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+"))
+
+  (global-set-key (kbd "C-;") 'set-work-folder-command)
+
+  (defun set-work-folder-command (dir)
+    (interactive "GEnter WORK folder: ")
+    (set-work-folder dir))
+
+  (defun set-work-folder (directory)
+    (let ((dir (or directory default-directory))
+          env-setting-file)
+      (unless (string= (getenv "WORK") dir)
+        (setenv "WORK" dir)
+        ;; make it permanent
+        (if (setq env-setting-file
+                  (case system-type
+                    (windows-nt nil)
+                    (darwin "~/.bash_profile")
+                    (gnu/linux "~/.bashrc")
+                    (t "nonexistent")))
+            (store-work-environment-variable env-setting-file dir)
+          (set-work-environment-varible dir)))))
+
+  (defun store-work-environment-variable (env-setting-file dir)
+    (with-temp-buffer
+      (insert-file-contents env-setting-file)
+      (goto-char (point-min))
+      (if (search-forward-regexp "export WORK=\\(.*\\)" (point-max) t)
+          (replace-match (format "\"%s\"" dir) t t nil 1)
+        (goto-char (point-max))
+        (insert (format "\nexport WORK=\"%s\"\n" dir)))
+      (write-file env-setting-file)))
+
+  (when (eq system-type 'windows-nt)
+    (setq w32-allow-system-shell t)) ; enables cmd.exe as shell
+
+  (defun set-work-environment-variable (directory)
+    (shell-command (format "setx WORK \"%s\""
+                           (directory-file-name (expand-file-name directory)))))
+
+  (defun copy-files-from-dot-spacemacs-dot-d ()
+    (let* ((work-env (getenv "WORK"))
+           (work-folder (and (stringp work-env) (file-name-as-directory work-env)))
+           (from-folder (file-name-as-directory
+                         (concat (file-name-as-directory
+                                  (getenv "HOME"))
+                                 ".spacemacs.d")))
+           (files-to-copy '("generic-instructions.txt"
+                            "time-considerations.txt"
+                            "theme-bigblow.setup"))
+           file-to-copy)
+      (if (not work-folder)
+          (error "set WORK folder first using C-;")
+        (dolist (file files-to-copy)
+          (when (file-readable-p
+                 (setq file-to-copy (concat from-folder file)))
+            (copy-file file-to-copy work-folder t t t t))))))
 
   (defun relocate-file-to-work-folder (&optional copy-not-move)
-    (let* ((work-folder (or (getenv "WORK")
-                            (concat (getenv "HOME") "/work")))
-           (this-file-name (file-name-nondirectory (buffer-file-name)))
-           (dest-file-name (concat work-folder "/" this-file-name)))
-      (mkdir work-folder t)
-      (if copy-not-move
-          (copy-file this-file-name dest-file-name t)
-        (rename-file this-file-name dest-file-name))
-      (find-alternate-file dest-file-name)
-      dest-file-name))
+    (let* ((work-env (getenv "WORK"))
+           (work-folder (and (stringp work-env) (file-name-as-directory work-env))))
+      (if (not work-folder)
+          (error "set WORK folder first using C-;")
+        (let* (((this-file-name (file-name-nondirectory (buffer-file-name)))
+                (dest-file-name (concat work-folder this-file-name))))
+          (mkdir work-folder t)
+          (if copy-not-move
+              (copy-file this-file-name dest-file-name t)
+            (rename-file this-file-name dest-file-name))
+          (find-alternate-file dest-file-name)
+          dest-file-name))))
 
   (defun calculate-score (possible-points-alist)
     (loop with named-list-alist =
