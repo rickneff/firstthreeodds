@@ -64,7 +64,10 @@
 
   (defun set-work-folder-command (dir)
     (interactive "GEnter WORK folder: ")
-    (set-work-folder dir))
+    (set-work-folder dir)
+    (if (y-or-n-p "Copy files from .spacemacs.d? ")
+        (copy-files-from-dot-spacemacs-dot-d))
+    (message "Ready to work."))
 
   (defun set-work-folder (directory)
     (let ((dir (or directory default-directory))
