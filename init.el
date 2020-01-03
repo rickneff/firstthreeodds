@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     clojure
      graphviz
      javascript
      csv
@@ -323,6 +324,8 @@ you should place your code here."
   (require 'org)
   (require 'org-crypt)
   (require 'ob)
+  (require 'ob-clojure)
+  (require 'cider)
   (org-sbe "~/.spacemacs.d/useful.org:code")
   )
 
@@ -333,6 +336,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/goo/byui/ctl.org")))
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
@@ -344,15 +348,15 @@ you should place your code here."
      (python . t)
      (shell . t)
      (R . t))))
+ '(org-babel-results-keyword "results")
  '(org-confirm-babel-evaluate nil)
  '(org-confirm-elisp-link-function nil)
  '(org-crypt-disable-auto-save (quote encrypt))
- '(org-pretty-entities t)
  '(org-enable-reveal-js-support t)
+ '(org-hide-emphasis-markers t)
+ '(org-pretty-entities t)
  '(org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
- '(org-reveal-title-slide 'auto)
- '(org-hide-emphasis-markers t) ;; show actually italicized text instead of /italicized text/
- '(org-babel-results-keyword "results")
+ '(org-reveal-title-slide (quote auto))
  '(package-archives
    (quote
     (("melpa" . "https://melpa.org/packages/")
