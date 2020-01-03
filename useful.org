@@ -95,7 +95,12 @@
       (write-file env-setting-file)))
 
   (when (eq system-type 'windows-nt)
-    (setq w32-allow-system-shell t)) ; enables cmd.exe as shell
+    (setq w32-allow-system-shell t ; enables cmd.exe as shell
+          save-interprogram-paste-before-kill 1)) ; stop killing my clipboard, plz
+
+  (when (executable-find "aspell") ; spell-checking
+    (setq ispell-program-name "aspell"
+          ispell-extra-args '("--sug-mode=ultra" "--lang=en_us")))
 
   (defun set-work-environment-variable (directory)
     (shell-command (format "setx WORK \"%s\""

@@ -56,3 +56,8 @@
   2. Read your writing aloud (or better yet, have someone else read it to you)
      to see how it sounds.
   3. Have someone who is good at English carefully proofread your writing.
+#+BEGIN_QUOTE
+  Besides a mathematical inclination, an exceptionally good mastery of one\rsquo{}s
+  native tongue is the most vital asset of a competent programmer.
+#+END_QUOTE
+  That quote was from a [[https://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD498.html][talk by a giant of computer science]], BTW.
