@@ -10,12 +10,13 @@
 - [[#key-bindings][Key bindings]]
 
 * Description
-This layer includes five packages:
+This layer includes six packages:
   - first-ten-million-primes
   - test-rns
   - bigal
   - google-this
-  - ob-erlang
+  - common-words
+  - ment
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs.d/init.el= file.
@@ -25,4 +26,4 @@ list in this file.
 * Key bindings
 | Key Binding | Description      |
 |-------------+------------------|
-| ~SPC x x x~ | Does nothing yet |
+| ~SPC x x x~   | Does nothing yet |

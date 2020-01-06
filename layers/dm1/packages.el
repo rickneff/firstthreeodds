@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst dm1-packages
-  '(first-ten-million-primes test-rns bigal google-this ob-erlang)
+  '(first-ten-million-primes test-rns bigal google-this common-words ment)
   "The list of Lisp packages required by the dm1 layer.
 
 Each entry is either:
@@ -67,6 +67,8 @@ Each entry is either:
 (defun dm1/init-google-this ()
   (google-this-mode 1))
 
-(defun dm1/init-ob-erlang ())
+(defun dm1/init-common-words ())
+
+(defun dm1/init-ment ())
 
 ;;; packages.el ends here
