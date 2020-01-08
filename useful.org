@@ -3,6 +3,8 @@
 
 #+name: code
 #+begin_src elisp :results silent
+  (require 'ment)
+
   (require 'org)
 
   (defun insert-src-block (lang look &optional results-specifier)
@@ -54,7 +56,6 @@
     (insert "
 #+language: en
 #+options: H:4 num:nil toc:nil \\n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \"HINT\")
-#+options: html-postamble:nil
 #+startup: entitiespretty showeverything
 #+setupfile: theme-bigblow.setup
 
