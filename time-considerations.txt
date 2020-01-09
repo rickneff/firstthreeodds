@@ -52,3 +52,8 @@
 * What is Time Worth?
   This quora exchange should provide some more food for thought:
   https://www.quora.com/I-need-my-salaried-employees-to-work-more-than-9-to-5-What-can-I-do-to-make-them-do-this
+* A Real Timesaver
+  https://rickneff.github.io/how-to-prepare-for-a-tools-audit.html
+
+   Be sure to visit/read all five tabs (click or type 'n' for next, 'p' for
+  previous).
