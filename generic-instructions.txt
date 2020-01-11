@@ -76,7 +76,7 @@
 
 ** Windows
    Use the files you unzipped. Here are the instructions extracted from
-   https://fontreg-2.1.3-redist.zip:
+   [[https://rickneff.github.io/fontreg-2.1.3-redist.zip]]:
 
    If you...
 
