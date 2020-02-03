@@ -21,7 +21,7 @@
   link) will update the table. For your convenience, this link will appear in
   every file.
 
-  [[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+  [[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
 
   For example, the bullets below specify two tasks you can practice on. For more
   advice, see the [[file:time-considerations.txt][time-considerations.txt]] file.
@@ -37,7 +37,7 @@
   If you want to see what your file will look like when formatted like The Book,
   run the link below:
 
-  [[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+  [[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
 
   Note that, again for your convenience, one of these links will appear in every
   file.

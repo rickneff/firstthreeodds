@@ -7,6 +7,18 @@
 
   (require 'org)
 
+  (require 'org-capture)
+
+  (setq org-directory (or (getenv "WORK") (getenv "HOME"))
+        capture-file "seize-the-day.org"
+        standard-options (list :empty-lines 1 :clock-in t :clock-resume t)
+        org-capture-templates `(("t" "todo" entry (file ,capture-file)
+                                 "* TODO %?\n%U\n%a\n" ,@standard-options)
+                                ("n" "note" entry (file ,capture-file)
+                                 "* %? :NOTE:\n%U\n%a\n" ,@standard-options)
+                                ("j" "journal" entry (file+datetree ,capture-file)
+                                 "* %?\n%U\n" ,@standard-options)))
+
   (defun insert-src-block (lang look &optional results-specifier)
     (insert (format "#+begin_src %s%s\n\n#+end_src" lang
                     (if results-specifier

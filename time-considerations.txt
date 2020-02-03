@@ -55,5 +55,5 @@
 * A Real Timesaver
   https://rickneff.github.io/how-to-prepare-for-a-tools-audit.html
 
-   Be sure to visit/read all five tabs (click or type 'n' for next, 'p' for
+  Be sure to visit/read all five tabs (click or type 'n' for next, 'p' for
   previous).
