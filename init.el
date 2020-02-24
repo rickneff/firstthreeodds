@@ -33,7 +33,6 @@ values."
    '(
      clojure
      graphviz
-     javascript
      csv
      python
      ;; ----------------------------------------------------------------
