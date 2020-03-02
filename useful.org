@@ -35,30 +35,39 @@
     (insert "  "))
 
   (defun el ()
+    (interactive)
     (insert-src-block "elisp" "(el"))
 
   (defun elc ()
+    (interactive)
     (insert-src-block "elisp" "(el" "code"))
 
   (defun elo ()
+    (interactive)
     (insert-src-block "elisp" "(el" "output"))
 
   (defun elr ()
+    (interactive)
     (insert-src-block "elisp" "(el" "raw"))
 
   (defun els ()
+    (interactive)
     (insert-src-block "elisp" "(el" "silent"))
 
   (defun elv ()
+    (interactive)
     (insert-src-block "elisp" "(el" "value"))
 
   (defun sh ()
+    (interactive)
     (insert-src-block "sh" "(sh"))
 
   (defun sho ()
+    (interactive)
     (insert-src-block "sh" "(sh" "output"))
 
   (defun shs ()
+    (interactive)
     (insert-src-block "sh" "(sh" "silent"))
 
   (defun insert-org-file-header (title)
