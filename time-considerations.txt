@@ -1,0 +1,59 @@
+-*- mode: org -*-
+#+title: Time Considerations
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+options: html-postamble:nil
+#+startup: entitiespretty
+#+setupfile: theme-bigblow.setup
+
+* A Time For Everything
+  As mentioned in the [[file:generic-instructions.txt][generic-instructions.txt]] file, you are encouraged to keep
+  track of how long you spend on reading the book and doing each EPP. This
+  should be *focused*, *concentrated* time --- so stop the clock before taking a
+  break (for any reason, especially unexpected interruptions). Org-mode makes it
+  easy to stop and restart timers.
+
+  One reason you would do well to carefully track your time is to avoid burnout.
+  In accordance with the standard \ldquo{}formula\rdquo (caveat --- only for an average
+  student seeking an average grade) that you should expect to spend two hours
+  outside of class for every hour in, you are not *expected* to work more than
+  10 hours per week on this class. (You are also not *forbidden* to work more
+  than that. Your choice.) Note that 10 hours is 8 hours in addition to the 2
+  you spend in class. That is *double* the outside-of-class hours of the
+  above-mentioned standard --- the reason being that this is a more demanding
+  course, and you are above-average students, or else you would not be seeking
+  the degrees you are.
+
+* Advice for the Wise
+  As managing time well is crucial to success in life, BYU-Idaho has some
+  helpful advice here:
+
+  [[https://www.byui.edu/counseling-center/self-help/time-management]]
+
+  Here is a quote from the STUDY HOURS FORMULA section:
+
+  To decide how many hours you need to study each week in order to get A\rsquo{}s, use
+  this rule of thumb:
+
+#+BEGIN_QUOTE
+   Study two hours per credit hour for a lighter class, three hours per credit
+   hour for an average class, and four hours per credit hour for a difficult
+   class.
+#+END_QUOTE
+
+   Most students consider this a difficult class, hence 4 hours per credit hour
+   equals 8 hours a week of study outside of class. Quoting again from the Time
+   Management page:
+
+   To ease your anxiety, remember that it is not only the quantity of study
+   time, but also the quality of study time that counts. This formula is just a
+   general guideline. You might try following it for a week, making adjustments
+   as needed.
+* What is Time Worth?
+  This quora exchange should provide some more food for thought:
+  https://www.quora.com/I-need-my-salaried-employees-to-work-more-than-9-to-5-What-can-I-do-to-make-them-do-this
+* A Real Timesaver
+  https://rickneff.github.io/how-to-prepare-for-a-tools-audit.html
+
+  Be sure to visit/read all five tabs (click or type 'n' for next, 'p' for
+  previous).
