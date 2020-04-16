@@ -40,6 +40,7 @@
     (insert-src-block "elisp" "(el"))
 
   (defun elc ()
+    "Add an elisp src block that outputs code."
     (interactive)
     (insert-src-block "elisp" "(el" "code"))
 
