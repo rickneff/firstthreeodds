@@ -70,6 +70,7 @@
     (insert-src-block "sh" "(sh"))
 
   (defun sho ()
+    "Add a sh src block that outputs what is printed."
     (interactive)
     (insert-src-block "sh" "(sh" "output"))
 
