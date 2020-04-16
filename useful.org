@@ -75,6 +75,7 @@
     (insert-src-block "sh" "(sh" "output"))
 
   (defun shs ()
+    "Add a sh src block that outputs nothing."
     (interactive)
     (insert-src-block "sh" "(sh" "silent"))
 
