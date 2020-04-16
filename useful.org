@@ -19,6 +19,9 @@
                                 ("j" "journal" entry (file+datetree ,capture-file)
                                  "* %?\n%U\n" ,@standard-options)))
 
+   (defun args-to-string (args)
+          (mapconcat 'stringify args " "))
+
   (defun insert-src-block (lang look &optional results-specifier)
     (insert (format "#+begin_src %s%s\n\n#+end_src" lang
                     (if results-specifier
