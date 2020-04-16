@@ -85,6 +85,10 @@
     (interactive)
     (insert-src-block "python" "(pyr" "raw"))
 
+  (defun pyp ()
+    (interactive)
+    (insert-src-block "python" "(pyp" "pp"))
+
   (defun sh ()
     "Add a sh src block."
     (interactive)
