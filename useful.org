@@ -81,6 +81,7 @@
     (insert-src-block "python" "(py"))
 
   (defun pyr ()
+    "Add a python src block that outputs the result value unformatted."
     (interactive)
     (insert-src-block "python" "(pyr" "raw"))
 
