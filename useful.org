@@ -45,6 +45,7 @@
     (insert-src-block "elisp" "(el" "code"))
 
   (defun elo ()
+    "Add an elisp src block that outputs what the code prints."
     (interactive)
     (insert-src-block "elisp" "(el" "output"))
 
