@@ -90,6 +90,10 @@
     (interactive)
     (insert-src-block "python" "(pyp" "pp"))
 
+  (defun pyf ()
+    (interactive)
+    (insert-src-block "python" "(pyf" "file"))
+
   (defun sh ()
     "Add a sh src block."
     (interactive)
