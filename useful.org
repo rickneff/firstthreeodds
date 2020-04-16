@@ -65,6 +65,7 @@
     (insert-src-block "elisp" "(el" "value"))
 
   (defun sh ()
+    "Add a sh src block."
     (interactive)
     (insert-src-block "sh" "(sh"))
 
