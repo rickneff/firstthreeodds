@@ -76,6 +76,7 @@
     (insert-src-block "elisp" "(el" "value"))
 
   (defun py ()
+    "Add a python src block."
     (interactive)
     (insert-src-block "python" "(py"))
 
