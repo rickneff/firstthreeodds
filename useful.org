@@ -40,6 +40,10 @@
              (insert-src-block* lang look :results results-specifier)
              (insert-src-block* lang look)))
 
+  (defun dot (file)
+    (interactive"F")
+    (insert-src-block* "dot" "(dot" :file file ))
+
   (defun el ()
     "Add an elisp src block."
     (interactive)
