@@ -35,6 +35,7 @@
     (insert "  "))
 
   (defun el ()
+    "Add an elisp src block."
     (interactive)
     (insert-src-block "elisp" "(el"))
 
