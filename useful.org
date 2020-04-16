@@ -36,19 +36,9 @@
     (insert "  "))
 
   (defun insert-src-block (lang look &optional results-specifier)
-    (insert (format "#+begin_src %s%s\n\n#+end_src" lang
-                    (if results-specifier
-                        (concat " :results " results-specifier)
-                      "")))
-    (forward-line -3)
-    (beginning-of-line)
-    (if (looking-at look)
-        (progn
-          (kill-line)
-          (delete-char 1)
-          (forward-line))
-      (forward-line 2))
-    (insert "  "))
+         (if results-specifier
+             (insert-src-block* lang look :results results-specifier)
+             (insert-src-block* lang look)))
 
   (defun el ()
     "Add an elisp src block."
