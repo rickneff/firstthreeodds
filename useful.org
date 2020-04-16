@@ -86,6 +86,7 @@
     (insert-src-block "python" "(pyr" "raw"))
 
   (defun pyp ()
+    "Add a python src block that outputs pretty-printed python."
     (interactive)
     (insert-src-block "python" "(pyp" "pp"))
 
