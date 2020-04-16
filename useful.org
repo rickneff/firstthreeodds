@@ -91,6 +91,7 @@
     (insert-src-block "python" "(pyp" "pp"))
 
   (defun pyf ()
+    "Add a python src block that interprts the results as a filename."
     (interactive)
     (insert-src-block "python" "(pyf" "file"))
 
