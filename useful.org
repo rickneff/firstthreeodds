@@ -80,6 +80,10 @@
     (interactive)
     (insert-src-block "python" "(py"))
 
+  (defun pyr ()
+    (interactive)
+    (insert-src-block "python" "(pyr" "raw"))
+
   (defun sh ()
     "Add a sh src block."
     (interactive)
