@@ -50,6 +50,7 @@
     (insert-src-block "elisp" "(el" "output"))
 
   (defun elr ()
+    "Add an elisp src block that outputs the result value unformatted."
     (interactive)
     (insert-src-block "elisp" "(el" "raw"))
 
