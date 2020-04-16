@@ -60,6 +60,7 @@
     (insert-src-block "elisp" "(el" "silent"))
 
   (defun elv ()
+    "Add an elisp src block that outputs the resulting value."
     (interactive)
     (insert-src-block "elisp" "(el" "value"))
 
