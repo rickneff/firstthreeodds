@@ -55,6 +55,7 @@
     (insert-src-block "elisp" "(el" "raw"))
 
   (defun els ()
+    "Add an elisp src block that outputs nothing."
     (interactive)
     (insert-src-block "elisp" "(el" "silent"))
 
