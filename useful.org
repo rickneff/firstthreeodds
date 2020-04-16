@@ -41,6 +41,7 @@
              (insert-src-block* lang look)))
 
   (defun dot (file)
+    "Add a dot src block."
     (interactive"F")
     (insert-src-block* "dot" "(dot" :file file ))
 
