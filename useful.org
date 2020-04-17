@@ -19,11 +19,12 @@
                                 ("j" "journal" entry (file+datetree ,capture-file)
                                  "* %?\n%U\n" ,@standard-options)))
 
-  (defun insert-src-block (lang look &optional results-specifier)
-    (insert (format "#+begin_src %s%s\n\n#+end_src" lang
-                    (if results-specifier
-                        (concat " :results " results-specifier)
-                      "")))
+   (defun args-to-string (args)
+          (mapconcat 'stringify args " "))
+
+   (defun insert-src-block* (lang look &rest args)
+    (insert (format "#+begin_src %s %s\n\n#+end_src" lang
+                     (args-to-string args)))
     (forward-line -3)
     (beginning-of-line)
     (if (looking-at look)
@@ -34,39 +35,78 @@
       (forward-line 2))
     (insert "  "))
 
+  (defun insert-src-block (lang look &optional results-specifier)
+         (if results-specifier
+             (insert-src-block* lang look :results results-specifier)
+             (insert-src-block* lang look)))
+
+  (defun dot (file)
+    "Add a dot src block."
+    (interactive"F")
+    (insert-src-block* "dot" "(dot" :file file ))
+
   (defun el ()
+    "Add an elisp src block."
     (interactive)
     (insert-src-block "elisp" "(el"))
 
   (defun elc ()
+    "Add an elisp src block that outputs code."
     (interactive)
     (insert-src-block "elisp" "(el" "code"))
 
   (defun elo ()
+    "Add an elisp src block that outputs what the code prints."
     (interactive)
     (insert-src-block "elisp" "(el" "output"))
 
   (defun elr ()
+    "Add an elisp src block that outputs the result value unformatted."
     (interactive)
     (insert-src-block "elisp" "(el" "raw"))
 
   (defun els ()
+    "Add an elisp src block that outputs nothing."
     (interactive)
     (insert-src-block "elisp" "(el" "silent"))
 
   (defun elv ()
+    "Add an elisp src block that outputs the resulting value."
     (interactive)
     (insert-src-block "elisp" "(el" "value"))
 
+  (defun py ()
+    "Add a python src block."
+    (interactive)
+    (insert-src-block "python" "(py"))
+
+  (defun pyr ()
+    "Add a python src block that outputs the result value unformatted."
+    (interactive)
+    (insert-src-block "python" "(pyr" "raw"))
+
+  (defun pyp ()
+    "Add a python src block that outputs pretty-printed python."
+    (interactive)
+    (insert-src-block "python" "(pyp" "pp"))
+
+  (defun pyf ()
+    "Add a python src block that interprts the results as a filename."
+    (interactive)
+    (insert-src-block "python" "(pyf" "file"))
+
   (defun sh ()
+    "Add a sh src block."
     (interactive)
     (insert-src-block "sh" "(sh"))
 
   (defun sho ()
+    "Add a sh src block that outputs what is printed."
     (interactive)
     (insert-src-block "sh" "(sh" "output"))
 
   (defun shs ()
+    "Add a sh src block that outputs nothing."
     (interactive)
     (insert-src-block "sh" "(sh" "silent"))
 
