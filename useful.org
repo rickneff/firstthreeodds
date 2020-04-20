@@ -19,12 +19,12 @@
                                 ("j" "journal" entry (file+datetree ,capture-file)
                                  "* %?\n%U\n" ,@standard-options)))
 
-   (defun args-to-string (args)
-          (mapconcat 'stringify args " "))
+  (defun args-to-string (args)
+    (mapconcat 'stringify args " "))
 
-   (defun insert-src-block* (lang look &rest args)
+  (defun insert-src-block* (lang look &rest args)
     (insert (format "#+begin_src %s %s\n\n#+end_src" lang
-                     (args-to-string args)))
+                    (args-to-string args)))
     (forward-line -3)
     (beginning-of-line)
     (if (looking-at look)
@@ -36,9 +36,9 @@
     (insert "  "))
 
   (defun insert-src-block (lang look &optional results-specifier)
-         (if results-specifier
-             (insert-src-block* lang look :results results-specifier)
-             (insert-src-block* lang look)))
+    (if results-specifier
+        (insert-src-block* lang look :results results-specifier)
+      (insert-src-block* lang look)))
 
   (defun dot (file)
     "Add a dot src block."
@@ -112,7 +112,7 @@
 
   (defun insert-org-file-header (title)
     (interactive "sEnter title: ")
-    (insert "-*- mode: org -*-\n#+title: ")
+    (insert "#+IMPORTANT:-*- mode: org -*-\n#+title: ")
     (insert title)
     (insert "
 #+language: en
