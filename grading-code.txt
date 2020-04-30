@@ -1,0 +1,222 @@
+#+IMPORTANT:-*- mode: org -*-
+#+title: Grading Code
+#+author: Rick Neff
+#+email: NeffR@byui.edu
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: ~/.spacemacs.d/theme-bigblow.setup
+
+* Code to Enter Scores
+  The purpose of this code is to help graders in their work, but it can also
+  help you! You can insert the same grade-calculation code they will, and play
+  \ldquo{}what if\rdquo on a more fine-grained scale than what iLearn can do.
+
+#+name: grading-code
+#+begin_src elisp :results silent
+  (defun safe-subseq (seq from to)
+    (subseq seq from (min to (length seq))))
+
+  (defun split-too-long-list (big-list size)
+    (let* ((len (/ (length big-list) (float size)))
+           (lo (floor len))
+           (hi (ceiling len)))
+      (mapcar* 'safe-subseq (make-list hi big-list)
+               (number-sequence 0 (* lo size) size)
+               (number-sequence size (* hi size) size))))
+
+  (defun remove-if-null (list-possibly-containing-nils)
+    (remove-if 'null list-possibly-containing-nils))
+
+  (defun cons-with-zero (some-list)
+    (mapcar* 'cons some-list (make-list (length some-list) 0)))
+
+  (defun cons-with-list-of-zeros (some-list)
+    (mapcar* 'cons some-list (make-list (length some-list) '(.0 .0 .0 .0))))
+
+  (defun pad-and-stringify (some-list pad)
+    (format (concat (make-string pad ? ) "%s")
+            (mapconcat (lambda (something)
+                         (format "%s" something))
+                       some-list " ")))
+
+  (defun format-exercises-or-problems (list-of-symbols)
+    (string-join
+     (mapcar*
+      'pad-and-stringify
+      (mapcar 'cons-with-zero
+              (mapcar 'remove-if-null
+                      (split-too-long-list list-of-symbols 6)))
+      (cons 0 (make-list 10 13)))
+     "\n"))
+
+  (defun fix-zeros (string-with-zeros)
+    (replace-regexp-in-string "0.0" ".0" string-with-zeros))
+
+  (defun format-puzzles (list-of-symbols)
+    (string-join
+     (mapcar
+      'fix-zeros
+      (mapcar* 'pad-and-stringify
+               (mapcar 'cons-with-list-of-zeros
+                       (mapcar 'remove-if-null
+                               (split-too-long-list list-of-symbols 3)))
+               (cons 0 (make-list 5 13))))
+     "\n"))
+
+  (defun format-EPPs ()
+    (format "EX '(%s)\n        PR '(%s)\n        PU '(%s)"
+            (format-exercises-or-problems (reverse (mapcar 'car Exercises)))
+            (format-exercises-or-problems (reverse (mapcar 'car Problems)))
+            (format-puzzles (reverse (mapcar 'car Puzzles)))))
+
+  (defun format-todo-tracking-code (todos-marked-done)
+    (format "
+          todos-marked-done %d
+          todos-marked-done-but-not-timed %d
+          report-done-correctly 10 ; 0 if missing or not updated before submitting
+          Tt (- 100 todos-marked-done-but-not-timed 10 (- report-done-correctly))"
+            todos-marked-done 0))
+
+  (defun format-rest-of-score-calculation-code (todos-marked-done)
+    (concat "
+          Ex (/ (apply '+ (mapcar 'cdr EX)) 1.0 (length EX))
+          Pr (/ (apply '+ (mapcar 'cdr PR)) 10.0 (length PR))
+          Pu (/ (apply '+ (apply 'append (mapcar 'cdr PU))) 1.0 (length PU))
+          raw-score (* Ex Pr)"
+          ;; MI-count-code
+          "
+          wrote-something t; change to nil if nothing was written implying MIs are not possible
+          MI-count (if wrote-something (length (ignore-errors (get-org-sbv misery))) 5)
+          Mc (if (< raw-score 0.5) 0 (* (floor (expt 2 (- 3 MI-count))) .01))"
+          ;; extra-credit code
+          "
+          extra-credit (+ Pu Mc)"
+          (format-todo-tracking-code todos-marked-done)))
+
+  (defun format-score-calculation-code ()
+    (format "\n#+begin_src elisp :results raw\n  (setq %s %s
+          score (* Tt (+ raw-score extra-credit))
+          displayed-score (format \"#+score: %c3.2f\\n\" score))\n%c+end_src\n"
+          (format-EPPs)
+          (format-rest-of-score-calculation-code
+            (loop for l in '(Exercises Problems Puzzles)
+                  sum (count-if (lambda (todo-state)
+                                  (eq todo-state 'done))
+                                (symbol-value l) :key 'cdr))) ?% ?#))
+
+  (defun insert-score-calculation-code ()
+    (goto-char (point-min))
+    (while (not (looking-at "^$"))
+      (forward-line 1))
+    (insert (format-score-calculation-code)))
+
+  (defun clear-vars ()
+    (mapc 'makunbound '(EX Ex PR Pr Pu Mc Tt raw-score extra-credit score)))
+
+  (defun gather-tlas ()
+    (let (sym)
+      (org-element-map (org-element-parse-buffer) 'headline
+        (lambda (x) (if (and (= 2 (org-element-property :level x))
+                             (boundp (setq sym
+                                           (intern (org-element-property
+                                                    :raw-value
+                                                    (org-element-property :parent x))))))
+                        (add-to-list sym
+                                     (cons (car (push (org-element-property :raw-value x) EPPs))
+                                           (org-element-property :todo-type x)))))))
+    t)
+
+  (defun iscc ()
+    (interactive)
+    (setq Exercises nil Problems nil Puzzles nil EPPs nil)
+    (gather-tlas)
+    (insert-score-calculation-code)
+    (clear-vars))
+
+  (defun update-score (epp points)
+    (save-excursion
+      (goto-char (point-min))
+      (when (search-forward (if (listp points) epp (format "%s \. " epp)) nil t)
+        (cond ((numberp points)
+               (delete-char 1)
+               (insert (number-to-string points)))
+              ((listp points)
+               (delete-char 12) ; " .0 .0 .0 .0"
+               (insert (apply 'format " .%d .%d .%d .%d" points)))
+              (t (error "bad points"))
+              ))
+      t))
+
+  (defun get-exercise-score (epp-tla)
+    (if (y-or-n-p (format "Give credit for exercise %s?" epp-tla)) 1 0))
+
+  (defun get-problem-score (epp-tla)
+    (let ((number (read-number (format "Enter points (1-10) for problem %s: " epp-tla))))
+      (min (max number 0) 10)))
+
+  (defun get-puzzle-score (epp-tla)
+    (let ((object
+           (read-from-minibuffer
+            (format "Enter list of points (e.g., (1 2 3 0)) for puzzle %s: " epp-tla)
+            nil nil t)))
+      (if (and (listp object) (<= (apply '+ object) 10))
+          object
+        "no good")))
+
+  (defun find-tla-of-epp-at-point ()
+    (let* ((where (point))
+           (entry (org-entry-get where "ITEM"))
+           (outline-path (org-get-outline-path)))
+      (or (car (member entry EPPs))
+          (car (member (second outline-path) EPPs)))))
+
+  (defun enter-score ()
+    (interactive)
+    (let (epp-tla points)
+      (setq epp-tla (find-tla-of-epp-at-point)
+            points (cond ((assoc epp-tla Exercises)
+                          (get-exercise-score epp-tla))
+                         ((assoc epp-tla Problems)
+                          (get-problem-score epp-tla))
+                         ((assoc epp-tla Puzzles)
+                          (get-puzzle-score epp-tla))
+                         (t (error "Unknown or missing TLA type"))))
+      (update-score epp-tla points))
+    (save-buffer))
+
+  (defun insert-mechanical-infelicities-table ()
+    (insert (concat "\n  #+name: misery\n"
+            "  | Mechanical Infelicity (MI) | What It Should Be | What It Cost You |\n"
+            "  |----------------------------+-------------------+------------------|\n"
+            "  |                            |                   | 4 bonus points   |\n"
+            "  |                            |                   | 2 bonus points   |\n"
+            "  |                            |                   | 1 bonus point    |\n"
+            "  |                            |                   | 1 bonus point    |\n")))
+
+  (defun imit ()
+    (interactive)
+    (insert-mechanical-infelicities-table))
+
+  (defun add-feedback (filename &optional feedback)
+    (with-temp-buffer
+      (insert-file-contents filename)
+      (goto-char (point-max))
+      (insert "\n:FEEDBACK:\n")
+      (when (stringp feedback)
+        (insert feedback))
+      (insert "\n:END:\n")
+      (write-file filename)))
+
+  (defun afb ()
+    (interactive)
+    (org-insert-drawer nil "FEEDBACK"))
+#+end_src
+
+* For Debugging
+  Execute this block after calling the =iscc= function.
+#+begin_src elisp :results code
+  (list (cons 'Exercises Exercises)
+        (cons 'Problems Problems)
+        (cons 'Puzzles Puzzles))
+#+end_src
