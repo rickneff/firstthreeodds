@@ -194,10 +194,17 @@
 
    The Tt factor is 100 minus the following:
 
-   - 1 point for each EPP you did that you failed to track.
-   - 1 point for each EPP you tracked that you failed to toggle from TODO to
-     DONE.
+   - 1 point for each EPP you did (and marked DONE) that you failed to track.
    - *10 points* for failure to include an *accurate clock summary report*.
+
+*** VERY IMPORTANT --- PLEASE READ AND HEED
+   As a very strong incentive to pay attention to this detail, starting with
+   Week 02 my graders will only grade the EPPs that are marked DONE.
+
+   Please don\rsquo{}t do a lot of work and then fail to get any points for it! Even if
+   you don\rsquo{}t finish, mark it DONE so you can get partial credit for what you did
+   do. In other words, use the toggling from TODO to DONE to signify that you
+   are done working on it, not that there was nothing more you could have done.
 
 *** But What If I\rsquo{}m Already Done?!
     :LOGBOOK:

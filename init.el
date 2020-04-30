@@ -325,6 +325,7 @@ you should place your code here."
   (require 'ob)
   (require 'ob-clojure)
   (require 'cider)
+  (require 'ox-reveal)
   (org-sbe "~/.spacemacs.d/useful.org:code")
   )
 
@@ -335,7 +336,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/goo/byui/ctl.org")))
+ '(org-agenda-files (quote ("~/ctl.org")))
  '(org-babel-load-languages
    (quote
     ((emacs-lisp . t)
@@ -351,7 +352,7 @@ you should place your code here."
  '(org-confirm-babel-evaluate nil)
  '(org-confirm-elisp-link-function nil)
  '(org-crypt-disable-auto-save (quote encrypt))
- '(org-enable-reveal-js-support t)
+ '(org-enable-reveal-js-support t t)
  '(org-hide-emphasis-markers t)
  '(org-pretty-entities t)
  '(org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
@@ -364,7 +365,7 @@ you should place your code here."
      ("fto" . "https://firstthreeodds.org/packages/"))))
  '(package-selected-packages
    (quote
-    (timp graphviz-dot-mode ox-reveal org-mime ghub let-alist alect-themes csv-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help mmm-mode markdown-toc markdown-mode gh-md winum org-category-capture web-mode tagedit smeargle slim-mode scss-mode sass-mode pug-mode orgit org-projectile org-present org org-pomodoro alert log4e gntp org-download magit-gitflow less-css-mode htmlize helm-gitignore helm-css-scss haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flyspell-correct-helm flyspell-correct evil-magit magit magit-popup git-commit with-editor emmet-mode auto-dictionary ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
+    (test-rns ment google-this first-ten-million-primes transient common-words clj-refactor inflections multiple-cursors paredit yasnippet lv cider-eval-sexp-fu cider sesman queue parseedn clojure-mode parseclj a bigal timp graphviz-dot-mode ox-reveal org-mime ghub let-alist alect-themes csv-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help mmm-mode markdown-toc markdown-mode gh-md winum org-category-capture web-mode tagedit smeargle slim-mode scss-mode sass-mode pug-mode orgit org-projectile org-present org org-pomodoro alert log4e gntp org-download magit-gitflow less-css-mode htmlize helm-gitignore helm-css-scss haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flyspell-correct-helm flyspell-correct evil-magit magit magit-popup git-commit with-editor emmet-mode auto-dictionary ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
