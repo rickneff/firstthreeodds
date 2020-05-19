@@ -31,6 +31,9 @@
   (defun cons-with-zero (some-list)
     (mapcar* 'cons some-list (make-list (length some-list) 0)))
 
+  (defun cons-with-zero-zero (some-list)
+    (mapcar* 'cons some-list (make-list (length some-list) "00")))
+
   (defun cons-with-list-of-zeros (some-list)
     (mapcar* 'cons some-list (make-list (length some-list) '(.0 .0 .0 .0))))
 
@@ -40,15 +43,21 @@
                          (format "%s" something))
                        some-list " ")))
 
-  (defun format-exercises-or-problems (list-of-symbols)
+  (defun format-exercises-or-problems (list-of-symbols cons-function)
     (string-join
      (mapcar*
       'pad-and-stringify
-      (mapcar 'cons-with-zero
+      (mapcar cons-function
               (mapcar 'remove-if-null
                       (split-too-long-list list-of-symbols 6)))
       (cons 0 (make-list 10 13)))
      "\n"))
+
+  (defun format-exercises (list-of-symbols)
+    (format-exercises-or-problems list-of-symbols 'cons-with-zero))
+
+  (defun format-problems (list-of-symbols)
+    (format-exercises-or-problems list-of-symbols 'cons-with-zero-zero))
 
   (defun fix-zeros (string-with-zeros)
     (replace-regexp-in-string "0.0" ".0" string-with-zeros))
@@ -66,8 +75,8 @@
 
   (defun format-EPPs ()
     (format "EX '(%s)\n        PR '(%s)\n        PU '(%s)"
-            (format-exercises-or-problems (reverse (mapcar 'car Exercises)))
-            (format-exercises-or-problems (reverse (mapcar 'car Problems)))
+            (format-exercises (reverse (mapcar 'car Exercises)))
+            (format-problems (reverse (mapcar 'car Problems)))
             (format-puzzles (reverse (mapcar 'car Puzzles)))))
 
   (defun format-todo-tracking-code (todos-marked-done)
@@ -141,6 +150,9 @@
         (cond ((numberp points)
                (delete-char 1)
                (insert (number-to-string points)))
+              ((stringp points)
+               (delete-char 2) ; "00"
+               (insert points))
               ((listp points)
                (delete-char 12) ; " .0 .0 .0 .0"
                (insert (apply 'format " .%d .%d .%d .%d" points)))
@@ -153,7 +165,7 @@
 
   (defun get-problem-score (epp-tla)
     (let ((number (read-number (format "Enter points (1-10) for problem %s: " epp-tla))))
-      (min (max number 0) 10)))
+      (format "%02d" (min (max number 0) 10))))
 
   (defun get-puzzle-score (epp-tla)
     (let ((object
@@ -211,6 +223,12 @@
   (defun afb ()
     (interactive)
     (org-insert-drawer nil "FEEDBACK"))
+
+  (spacemacs/declare-prefix "o" "Grading") ;; give "SPC o" a name
+  (spacemacs/set-leader-keys "oi" 'iscc) ;; "SPC o i" for iscc (insert score calculation code)
+  (spacemacs/set-leader-keys "ou" 'imit) ;; "SPC o u" for imit (insert mechanical infelicity table)
+  (spacemacs/set-leader-keys "of" 'afb) ;; "SPC o f" for afb (additional feed back)
+  (spacemacs/set-leader-keys "os" 'enter-score) ;; "SPC o s" for enter-score
 #+end_src
 
 * For Debugging
