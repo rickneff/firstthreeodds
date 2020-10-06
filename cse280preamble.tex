@@ -1,0 +1,128 @@
+% This file can be included with a command like:
+% \input{\detokenize{~/.spacemacs.d/cse380preamble.tex}}
+
+%
+% Set lengths
+%
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+%
+% mathify-- ensure argument is in math mode
+%
+\newcommand{\mathify}[1]{\ifmmode{#1}\else\mbox{$#1$}\fi}
+
+%
+% Header box to go at the top of the first page
+%
+\def\subjnum{CSE 280}
+\def\subjname{Discrete Mathematics I}
+
+\newcommand{\headerbox}[3]{
+  \renewcommand{\thepage}{\arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{
+      \vbox{
+        \hbox to 5.78in { {\bf \subjnum} \hfill {\bf \subjname} }
+        \vspace{4mm}
+        \hbox to 5.78in { {\Large \hfill #1  \hfill} }
+        \vspace{2mm}
+        \hbox to 5.78in { {\it #2 \hfill #3} }
+        }
+      }
+  \end{center}
+  \vspace*{4mm}
+  }
+
+%
+% Some uses of headerbox
+%
+\newcommand{\placeholder}[1]{\headerbox{Placeholder}{Fall 2020}{#1}}
+\newcommand{\assignment}[3]{\headerbox{#1}{Assignment #1}{#2}{#3}}
+\newcommand{\quiz}[1]{\headerbox{#1 Quiz}{Name:}{}}
+\newcommand{\handin}[3]{\headerbox{#1}{#2}{#3}}
+\newcommand{\handout}[3]{\headerbox{#1}{Handout #2}{#3}}
+\newcommand{\syllabus}{\headerbox{Syllabus}{Fall 2020}{Rick Neff}}
+
+%
+% Useful symbols
+%
+\newcommand{\qed}{\rule{7pt}{7pt}}
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\Nat}{\bf N}                        % natural numbers
+\newcommand{\Int}{\mathbf{Z}}                   % integers
+\newcommand{\Real}{\mathbf{R}}                  % reals
+\newcommand{\Bool}{\it Bool}                    % booleans
+\newcommand{\true}{\tt t}
+\newcommand{\false}{\tt f}
+\newcommand{\I}{\cal I}                         % interpretations
+\newcommand{\M}{\cal M}                         % meaning functions
+\newcommand{\A}{\cal A}                         % arithmetic interpretation
+\newcommand{\B}{\cal B}                         % binary word interpretation
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\Zp}{\mathbb{Z^{+}}}
+
+%
+% Useful functions
+%
+\newcommand{\abs}[1]{\mathify{\left| #1 \right|}}
+\renewcommand{\Pr}[1]{\mathify{\mbox{Pr}\left[#1\right]}}
+\newcommand{\Exp}[1]{\mathify{\mbox{Exp}\left[#1\right]}}
+\newcommand{\set}[1]{\mathify{\left\{ #1 \right\}}}
+\newcommand{\cset}[2]{\set{#1\ :\ #2}}  % a conditional notation to define sets
+\newcommand{\lset}[2]{\set{#1,\ldots,#2}} % set {from,...,to}
+\newcommand{\suchthat}{\vert}
+\newcommand{\st}{\suchthat}
+\newcommand{\forsome}{\exists}
+
+%
+% abbreviations
+%
+\newcommand{\ie}{{\em i.e.}}
+\newcommand{\etc}{{\em etc.}}
+\newcommand{\eg}{{\em e.g.}}
+%\newcommand{\wlog}{\em w.l.o.g.}
+\newcommand{\cf}{{\em cf.}}
+\newcommand{\viz}{{\em viz.}}
+\newcommand{\hint}{{\em Hint}:\ }              % for in-line hints
+\newcommand{\note}{{\em Note}:\ }              % for in-line notes
+\newcommand{\remark}{{\em Remark}\/:\ }        % for in-line remarks
+
+%
+% Use headerbox instead of \maketitle
+% see cse380afterheader.tex
+%
+\renewcommand{\maketitle}{}
+
+%
+% Skip a line between paragraphs and don't indent them
+%
+\setlength\parindent{0pt}
+\usepackage{parskip}
+
+%
+% For including python code
+%
+\usepackage{minted}
+\usepackage{xcolor}
+\definecolor{bg}{rgb}{0.9,0.9,0.9}
+
+%
+% Example (remove leading %s)
+%
+%\begin{minted}
+%[
+% frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=bg,fontsize=\footnotesize
+%%linenos
+%]
+%{python}
+%def f(m, n):
+%    x = m + n
+%    return (((x - 2) * (x - 1)) // 2) + m
+%\end{minted}

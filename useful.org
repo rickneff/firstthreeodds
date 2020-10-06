@@ -119,14 +119,16 @@
     (interactive "sEnter title: ")
     (insert "#+IMPORTANT:-*- mode: org -*-\n#+title: ")
     (insert title)
-    (insert "
+    (let* ((dm1 (= ?1 (elt (cadr (butlast (reverse (split-string (buffer-file-name) "/")) 2)) 2)))
+           (course-first-digit (if dm1 2 3)))
+      (insert (format "
 #+language: en
 #+options: H:4 num:nil toc:nil \\n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \"HINT\")
 #+startup: entitiespretty showeverything
 #+setupfile: ~/.spacemacs.d/theme-bigblow.setup
-#+LATEX_HEADER: \\input{\\detokenize{~/.spacemacs.d/cse380preamble.tex}}
-#+LATEX: \\input{\\detokenize{~/.spacemacs.d/cse380headerbox.tex}}
-"))
+#+LATEX_HEADER: \\input{\\detokenize{~/.spacemacs.d/cse%d80preamble.tex}}
+#+LATEX: \\input{\\detokenize{~/.spacemacs.d/cse%d80headerbox.tex}}
+" course-first-digit course-first-digit))))
 
   (global-set-key (kbd "C-;") 'set-work-folder-command)
 
