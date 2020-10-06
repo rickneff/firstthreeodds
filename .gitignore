@@ -2,5 +2,4 @@
 *.el
 *.elisp
 *.html
-*.tex
 *.pdf

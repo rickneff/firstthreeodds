@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst dm1-packages
-  '(first-ten-million-primes test-rns bigal google-this common-words ment)
+  '(first-ten-million-primes test-rns bigal google-this common-words ment git)
   "The list of Lisp packages required by the dm1 layer.
 
 Each entry is either:
@@ -70,5 +70,7 @@ Each entry is either:
 (defun dm1/init-common-words ())
 
 (defun dm1/init-ment ())
+
+(defun dm1/init-git ())
 
 ;;; packages.el ends here

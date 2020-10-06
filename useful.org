@@ -40,6 +40,11 @@
         (insert-src-block* lang look :results results-specifier)
       (insert-src-block* lang look)))
 
+  (defun clj ()
+    "Add an elisp src block that outputs code."
+    (interactive)
+    (insert-src-block "clojure" "(clj" "pp :session aa"))
+
   (defun dot (file)
     "Add a dot src block."
     (interactive"F")
@@ -80,10 +85,10 @@
     (interactive)
     (insert-src-block "python" "(py"))
 
-  (defun pyr ()
+  (defun pyo ()
     "Add a python src block that outputs the result value unformatted."
     (interactive)
-    (insert-src-block "python" "(pyr" "raw"))
+    (insert-src-block "python" "(pyr" "output :session one"))
 
   (defun pyp ()
     "Add a python src block that outputs pretty-printed python."
@@ -118,8 +123,9 @@
 #+language: en
 #+options: H:4 num:nil toc:nil \\n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \"HINT\")
 #+startup: entitiespretty showeverything
-#+setupfile: theme-bigblow.setup
-
+#+setupfile: ~/.spacemacs.d/theme-bigblow.setup
+#+LATEX_HEADER: \\input{\\detokenize{~/.spacemacs.d/cse380preamble.tex}}
+#+LATEX: \\input{\\detokenize{~/.spacemacs.d/cse380headerbox.tex}}
 "))
 
   (global-set-key (kbd "C-;") 'set-work-folder-command)
@@ -224,4 +230,13 @@
       (error nil)))
 
   (add-hook 'org-babel-after-execute-hook 'dm/display-inline-images 'append)
+
+  (require 'git) ; for git commands
+
+  (defun commit-and-push-to-repo (repo file-to-commit commit-message)
+    (let ((git-repo repo))
+      (git-add file-to-commit)
+      (git-commit commit-message file-to-commit)
+      (git-fetch "origin")
+      (git-push "origin" "master")))
 #+end_src
